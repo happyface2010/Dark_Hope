@@ -3,29 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Галерея Стасона | Портальная страница</title>
+    <title>Галерея Стасона | Тёмно-красный терминал</title>
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none; /* легкий эстетический эффект, но текст можно копировать при необходимости */
         }
 
         body {
             min-height: 100vh;
             background: #000000;
-            font-family: 'Segoe UI', 'Inter', system-ui, -apple-system, 'Roboto', monospace;
+            font-family: 'Courier New', 'Fira Code', 'Source Code Pro', monospace;
             display: flex;
             align-items: center;
             justify-content: center;
             padding: 2rem;
             position: relative;
-            color: #eef5ff;
+            color: #aa4a4a;
+            text-shadow: 0 0 2px #440000;
         }
 
-        /* ========= ПРИГЛУШЕННОЕ МЕРЦАНИЕ ЦВЕТОВ НА ФОНЕ ========= */
-        /* Абстрактное динамическое свечение, несколько слоев для мягкого "дыхания" */
+        /* ========= ТЁМНО-КРАСНОЕ МЕРЦАНИЕ ========= */
         .ambient-glow {
             position: fixed;
             top: 0;
@@ -39,280 +38,283 @@
 
         .glow-orb {
             position: absolute;
-            border-radius: 50%;
-            filter: blur(80px);
-            opacity: 0.2;
-            animation: breatheGlow 9s infinite alternate ease-in-out;
+            border-radius: 0%;
+            filter: blur(100px);
+            opacity: 0.12;
+            animation: pulseDarkRed 14s infinite alternate ease-in-out;
+            background: radial-gradient(circle, #660000, #1a0000);
         }
 
-        /* первый шар — глубокий фиолетово-синий */
         .orb1 {
             width: 70vw;
             height: 70vw;
-            background: radial-gradient(circle, #3b2a6b, #1a1040);
             top: -20vh;
             left: -20vw;
-            animation-duration: 12s;
-            opacity: 0.18;
+            animation-duration: 16s;
         }
 
-        /* второй шар — тёмно-бордовый с малиновым отливом */
         .orb2 {
             width: 80vh;
             height: 80vh;
-            background: radial-gradient(circle, #4a1e3c, #1e0a1e);
             bottom: -30vh;
             right: -20vw;
-            animation-duration: 14s;
-            animation-delay: -2s;
-            opacity: 0.2;
+            animation-duration: 20s;
+            animation-delay: -5s;
         }
 
-        /* третий шар — холодный изумрудный оттенок */
         .orb3 {
             width: 60vw;
             height: 60vw;
-            background: radial-gradient(circle, #1e4a4a, #0a2a2a);
             top: 40vh;
             right: 10vw;
-            animation-duration: 16s;
-            animation-delay: -5s;
-            opacity: 0.15;
+            animation-duration: 22s;
+            animation-delay: -8s;
         }
 
-        /* четвертый шар - тёплый янтарный акцент, очень приглушенно */
         .orb4 {
             width: 50vw;
             height: 50vw;
-            background: radial-gradient(circle, #6b4e2a, #2a1e0a);
             bottom: 10vh;
             left: 15vw;
             animation-duration: 18s;
             animation-delay: -3s;
-            opacity: 0.12;
         }
 
-        @keyframes breatheGlow {
+        @keyframes pulseDarkRed {
             0% {
                 transform: scale(0.9) translate(0px, 0px);
-                opacity: 0.1;
+                opacity: 0.06;
             }
             100% {
-                transform: scale(1.4) translate(20px, -20px);
-                opacity: 0.28;
+                transform: scale(1.5) translate(20px, -20px);
+                opacity: 0.18;
             }
         }
 
-        /* тонкая зернистость для атмосферы (ещё один слой мерцания) */
-        .noise-overlay {
+        /* БЕЛЫЙ ШУМ (полупрозрачный) */
+        .white-noise {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMDYiLz48L3N2Zz4=');
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjkiIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMTUiLz48L3N2Zz4=');
             background-repeat: repeat;
             opacity: 0.2;
+            pointer-events: none;
+            z-index: 1;
+            mix-blend-mode: normal;
+        }
+
+        /* дополнительный слой зернистости для усиления эффекта */
+        .grain-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI1MDAiIGhlaWdodD0iNTAwIj48ZmlsdGVyIGlkPSJhIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjYiIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjYSkiIG9wYWNpdHk9IjAuMTIiLz48L3N2Zz4=');
+            background-repeat: repeat;
+            opacity: 0.25;
             pointer-events: none;
             z-index: 1;
             mix-blend-mode: overlay;
         }
 
-        /* контентный слой поверх фоновой магии */
         .content {
             position: relative;
             z-index: 10;
             max-width: 1300px;
             width: 100%;
-            backdrop-filter: blur(2px);
+            border: 2px solid #6a1a1a;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(1px);
+            padding: 2rem;
+            box-shadow: 0 0 18px rgba(100, 20, 20, 0.4), inset 0 0 5px rgba(100, 20, 20, 0.2);
         }
 
-        /* Заголовок главный */
         .hero {
             text-align: center;
-            margin-bottom: 3rem;
-            border-bottom: 1px dashed rgba(255, 255, 255, 0.2);
-            padding-bottom: 1.5rem;
+            margin-bottom: 2rem;
+            border-bottom: 2px solid #6a1a1a;
+            padding-bottom: 1rem;
         }
 
         h1 {
-            font-size: clamp(2.6rem, 10vw, 5rem);
-            font-weight: 700;
-            letter-spacing: 4px;
+            font-size: clamp(2rem, 8vw, 4rem);
+            font-weight: 800;
+            letter-spacing: 6px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #f0f0ff 0%, #c0b9ff 50%, #a0a5ff 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 12px rgba(100, 80, 255, 0.3);
-            word-break: keep-all;
+            color: #aa5555;
+            text-shadow: 0 0 6px #3a0000;
+            background: none;
+            font-family: 'Courier New', monospace;
         }
 
         .sub {
-            font-size: 1rem;
-            margin-top: 0.75rem;
-            opacity: 0.7;
+            font-size: 0.85rem;
+            margin-top: 0.5rem;
+            opacity: 0.8;
             font-family: monospace;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            color: #9b4a4a;
         }
 
-        /* панель управления, индикаторы */
         .status-panel {
-            background: rgba(10, 10, 20, 0.55);
-            backdrop-filter: blur(8px);
-            border-radius: 2rem;
-            padding: 0.8rem 1.8rem;
-            margin-bottom: 2.5rem;
+            background: #0a0202;
+            border: 1px solid #6a1a1a;
+            padding: 0.6rem 1.5rem;
+            margin-bottom: 2rem;
             display: flex;
             flex-wrap: wrap;
             align-items: baseline;
             justify-content: space-between;
             gap: 1rem;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+            box-shadow: inset 0 0 6px rgba(100, 20, 20, 0.3), 0 2px 6px rgba(0,0,0,0.8);
         }
 
         .counter {
-            font-size: 0.9rem;
-            background: rgba(0, 0, 0, 0.6);
+            font-size: 0.85rem;
+            background: #0a0000;
             padding: 0.3rem 1rem;
-            border-radius: 40px;
-            font-weight: 500;
+            border-left: 3px solid #8b3a3a;
+            font-weight: 600;
+            letter-spacing: 1px;
+            color: #bb7777;
         }
 
         .counter span {
-            color: #bbf0ff;
+            color: #cc8888;
             font-weight: bold;
             font-size: 1.2rem;
+            text-shadow: 0 0 4px #550000;
         }
 
         .refresh-btn {
-            background: rgba(30, 30, 50, 0.8);
-            border: 1px solid rgba(255, 220, 150, 0.6);
-            padding: 0.4rem 1.2rem;
-            border-radius: 2rem;
-            font-size: 0.85rem;
-            font-weight: 500;
+            background: #0a0101;
+            border: 1px solid #8b2a2a;
+            padding: 0.4rem 1.4rem;
+            font-size: 0.8rem;
+            font-weight: 600;
             cursor: pointer;
             transition: all 0.2s ease;
-            color: #f2e8cf;
-            font-family: inherit;
-            backdrop-filter: blur(4px);
+            color: #bb6a6a;
+            font-family: monospace;
+            text-transform: uppercase;
+            letter-spacing: 1px;
         }
 
         .refresh-btn:hover {
-            background: rgba(80, 70, 130, 0.9);
-            border-color: #ffdfa5;
-            color: white;
-            transform: scale(0.97);
-            box-shadow: 0 0 8px rgba(200, 180, 255, 0.3);
+            background: #2a0a0a;
+            border-color: #aa5555;
+            color: #dd8888;
+            box-shadow: 0 0 12px rgba(100, 30, 30, 0.6);
+            transform: scale(0.98);
         }
 
-        /* сетка карточек (кнопок перехода) */
         .gallery-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-            gap: 1.8rem;
+            gap: 1.5rem;
             margin-top: 1rem;
         }
 
-        /* каждая карточка — кнопка перехода */
         .file-card {
-            background: rgba(12, 12, 20, 0.7);
-            backdrop-filter: blur(12px);
-            border-radius: 1.8rem;
-            padding: 1.6rem 1rem;
+            background: #040000;
+            border: 1px solid #6a1a1a;
+            padding: 1.2rem 0.8rem;
             text-align: center;
             cursor: pointer;
-            transition: all 0.25s cubic-bezier(0.2, 0.9, 0.4, 1.1);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+            transition: all 0.2s cubic-bezier(0.2, 0.9, 0.4, 1.1);
             text-decoration: none;
             display: block;
-            color: inherit;
+            color: #b66a6a;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.6);
         }
 
         .file-card:hover {
-            transform: translateY(-6px);
-            background: rgba(25, 25, 45, 0.85);
-            border-color: rgba(210, 180, 255, 0.7);
-            box-shadow: 0 12px 28px rgba(0, 0, 0, 0.6), 0 0 12px rgba(140, 100, 220, 0.3);
+            background: #1a0606;
+            border-color: #aa4a4a;
+            box-shadow: 0 0 15px rgba(100, 30, 30, 0.6);
+            transform: translateY(-3px);
+            color: #dd8888;
         }
 
         .file-icon {
-            font-size: 2.8rem;
-            margin-bottom: 0.7rem;
-            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.5));
+            font-size: 2rem;
+            margin-bottom: 0.5rem;
+            color: #aa5555;
+            text-shadow: 0 0 5px #440000;
+            font-family: monospace;
+            letter-spacing: 2px;
         }
 
         .file-name {
-            font-size: 1.25rem;
+            font-size: 1.1rem;
             font-weight: 600;
-            font-family: 'SF Mono', 'Fira Code', monospace;
+            font-family: 'Courier New', monospace;
             word-break: break-all;
-            background: rgba(0,0,0,0.4);
+            background: #0f0000;
             display: inline-block;
             padding: 0.2rem 0.8rem;
-            border-radius: 40px;
-            letter-spacing: 0.3px;
+            border-left: 2px solid #8b3a3a;
+            border-right: 2px solid #8b3a3a;
         }
 
         .file-badge {
             margin-top: 0.8rem;
             font-size: 0.7rem;
-            opacity: 0.7;
+            opacity: 0.8;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 8px;
+            font-family: monospace;
         }
 
         .badge-html {
-            background: #e06c2e20;
+            background: #1a0404;
             padding: 0.2rem 0.6rem;
-            border-radius: 20px;
-            border-left: 2px solid #e06c2e;
+            border-left: 2px solid #8b3a3a;
+            color: #bb7777;
         }
 
-        /* сообщение, если нет других файлов */
         .empty-message {
             text-align: center;
-            padding: 3rem 2rem;
-            background: rgba(0, 0, 0, 0.5);
-            border-radius: 2rem;
-            backdrop-filter: blur(4px);
-            border: 1px dashed rgba(255,255,200,0.3);
-            font-size: 1.2rem;
+            padding: 2rem 1rem;
+            background: #030000;
+            border: 1px solid #6a1a1a;
+            font-size: 0.9rem;
+            color: #bb7777;
         }
 
         .empty-message p {
             margin: 0.5rem 0;
         }
 
-        .emoji-hint {
-            font-size: 2rem;
-            margin-bottom: 0.5rem;
-        }
-
         footer {
-            margin-top: 3rem;
+            margin-top: 2.5rem;
             text-align: center;
-            font-size: 0.75rem;
-            opacity: 0.45;
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 1.8rem;
+            font-size: 0.7rem;
+            opacity: 0.6;
+            border-top: 1px solid #6a1a1a;
+            padding-top: 1rem;
+            color: #aa6a6a;
+            letter-spacing: 1px;
         }
 
-        /* адаптация для мобильных устройств */
         @media (max-width: 640px) {
             body {
+                padding: 1rem;
+            }
+            .content {
                 padding: 1rem;
             }
             .gallery-grid {
                 gap: 1rem;
             }
             .file-card {
-                padding: 1.2rem 0.8rem;
+                padding: 1rem 0.6rem;
             }
             .status-panel {
                 flex-direction: column;
@@ -321,13 +323,17 @@
             }
         }
 
-        /* анимация легкого мерцания для отдельных элементов (дополнительный шарм) */
-        @keyframes softPulse {
-            0% { text-shadow: 0 0 0px rgba(200,180,255,0);}
-            100% { text-shadow: 0 0 6px rgba(170,140,255,0.3);}
+        @keyframes darkRedPulse {
+            0% { text-shadow: 0 0 0px #550000; border-color: #6a1a1a;}
+            100% { text-shadow: 0 0 3px #aa5555; border-color: #aa4a4a;}
         }
         .file-card:hover .file-name {
-            animation: softPulse 0.8s infinite alternate;
+            animation: darkRedPulse 0.6s infinite alternate;
+        }
+
+        .refresh-btn:active {
+            background: #2a0808;
+            transform: scale(0.96);
         }
     </style>
 </head>
@@ -339,71 +345,63 @@
     <div class="glow-orb orb3"></div>
     <div class="glow-orb orb4"></div>
 </div>
-<div class="noise-overlay"></div>
+<div class="white-noise"></div>
+<div class="grain-overlay"></div>
 
 <div class="content">
     <div class="hero">
-        <h1>Галерея Стасона</h1>
-        <div class="sub">✦ цифровой архив · живые страницы ✦</div>
+        <h1>[ГАЛЕРЕЯ СТАСОНА]</h1>
+        <div class="sub">// ТЁМНО-КРАСНЫЙ ТЕРМИНАЛ // ЦИФРОВОЙ АРХИВ //</div>
     </div>
 
     <div class="status-panel">
         <div class="counter">
-            📄 Найдено файлов: <span id="fileCount">0</span>
+            [ОБНАРУЖЕНО ФАЙЛОВ] : <span id="fileCount">0</span>
         </div>
         <div class="refresh-btn" id="manualRefreshBtn">
-            ⟳ Обновить список
+            [ СКАНИРОВАТЬ ]
         </div>
     </div>
 
-    <!-- контейнер для динамически создаваемых кнопок перехода -->
     <div id="galleryContainer" class="gallery-grid">
-        <!-- индикатор загрузки -->
         <div class="empty-message" style="grid-column:1/-1;">
-            <div class="emoji-hint">✨🔍✨</div>
-            <p>сканирование файлов .html ...</p>
+            <p>СКАНИРОВАНИЕ HTML-ФАЙЛОВ ...</p>
         </div>
     </div>
     <footer>
-        ⚡ автоопределение всех HTML-файлов в текущей директории<br>
-        кроме index.html · приглушенное свечение фона · галерея Стасона
+        АВТОМАТИЧЕСКОЕ ОБНАРУЖЕНИЕ .html В ТЕКУЩЕМ КАТАЛОГЕ<br>
+        [ СТИЛЬ: ТЁМНО-КРАСНЫЙ / ПОЛУПРОЗРАЧНЫЙ БЕЛЫЙ ШУМ / ОСТРЫЕ ГРАНИ ]
     </footer>
 </div>
 
 <script>
     (function() {
-        // получаем контейнер и элементы для отображения
         const galleryContainer = document.getElementById('galleryContainer');
         const fileCountSpan = document.getElementById('fileCount');
 
-        // служебная функция: очистить контейнер (кроме возможных сообщений)
         function clearContainer() {
             galleryContainer.innerHTML = '';
         }
 
-        // показать состояние загрузки/пустоты
         function showLoadingState(isLoading = true) {
             if (isLoading) {
                 galleryContainer.innerHTML = `
                     <div class="empty-message" style="grid-column:1/-1;">
-                        <div class="emoji-hint">🌀 ⚡ 🌀</div>
-                        <p>поиск HTML-файлов в папке...</p>
-                        <small style="opacity:0.6">анализ директории через list API GitHub Pages (или локальный сервер)</small>
+                        <p>[ АНАЛИЗ ДИРЕКТОРИИ ] ... ПОИСК .HTML</p>
+                        <small style="opacity:0.7">ЗАПРОС СПИСКА ЧЕРЕЗ API ХОСТИНГА</small>
                     </div>
                 `;
             }
         }
 
-        // отображение списка файлов (массив имён .html кроме текущего документа)
         function renderFileList(htmlFiles) {
             clearContainer();
             if (!htmlFiles.length) {
-                // нет дополнительных html страниц
                 galleryContainer.innerHTML = `
                     <div class="empty-message" style="grid-column:1/-1;">
-                        <div class="emoji-hint">🌌📭🌌</div>
-                        <p>Пока нет дополнительных HTML-файлов в этой папке</p>
-                        <p style="font-size:0.85rem; margin-top:10px;">Создайте новый файл, например <strong>about.html</strong> или <strong>project.html</strong>, и он автоматически появится здесь как кнопка!</p>
+                        <p>// СТАТУС: НЕТ ДОПОЛНИТЕЛЬНЫХ HTML-ФАЙЛОВ //</p>
+                        <p style="font-size:0.8rem; margin-top:10px;">РАЗМЕСТИТЕ ФАЙЛЫ .html В ЭТОЙ ПАПКЕ (КРОМЕ INDEX.HTML)</p>
+                        <p style="font-size:0.7rem;">ИСПОЛЬЗУЙТЕ [ СКАНИРОВАТЬ ] ДЛЯ ОБНОВЛЕНИЯ</p>
                     </div>
                 `;
                 fileCountSpan.innerText = '0';
@@ -411,74 +409,48 @@
             }
 
             fileCountSpan.innerText = htmlFiles.length;
-            // для каждого файла создаём карточку-ссылку
             for (let fileName of htmlFiles) {
                 const card = document.createElement('a');
                 card.className = 'file-card';
-                // указываем относительный путь к файлу
                 card.href = fileName;
-                // чтобы ссылка вела на страницу без перезагрузки в том же окне (стандартное поведение)
-                // но добавим атрибут для открытия без форсирования
                 card.target = '_self';
-                // декоративный элемент
+
                 const iconSpan = document.createElement('div');
                 iconSpan.className = 'file-icon';
-                // иконка в зависимости от имени (стилизация)
-                iconSpan.innerHTML = '📄✨';
-                
+                iconSpan.innerHTML = '[HTML]';  
+
                 const nameSpan = document.createElement('div');
                 nameSpan.className = 'file-name';
-                // отображаем имя файла с расширением, но красиво
-                let displayName = fileName;
-                // если имя длинное, но покажем целиком, перенос слов
-                nameSpan.innerText = displayName;
+                nameSpan.innerText = fileName;
                 
                 const badgeDiv = document.createElement('div');
                 badgeDiv.className = 'file-badge';
-                badgeDiv.innerHTML = `<span class="badge-html">🔗 HTML-документ</span> <span>➡️ переход</span>`;
+                badgeDiv.innerHTML = `<span class="badge-html">[ .HTML ]</span> <span>[ ПЕРЕХОД ]</span>`;
                 
                 card.appendChild(iconSpan);
                 card.appendChild(nameSpan);
                 card.appendChild(badgeDiv);
                 
-                // легкий эффект: при клике можно добавить необязательный лог, но оставляем стандартную навигацию
                 card.addEventListener('click', (e) => {
-                    // разрешаем стандартный переход
-                    console.log(`Переход на страницу: ${fileName}`);
+                    console.log(`Переход: ${fileName}`);
                 });
                 galleryContainer.appendChild(card);
             }
         }
 
-        // основной механизм: получить список всех HTML-файлов в текущей директории.
-        // Поскольку в GitHub Pages нет прямого доступа к списку файлов через обычный fetch,
-        // мы используем элегантный метод: запрос к директории и парсинг ссылок из ответа сервера.
-        // Это работает на GitHub Pages, так как при обращении к папке без index.html сервер отдает
-        // листинг директории в виде HTML (если включено, и во многих окружениях статики - да)
-        // Но для надёжности, мы также поддержим сценарий, если не удастся распарсить - предложим ручное обновление.
-        // Альтернативно: пробуем запросить список через файл "list.json"? нет, поэтому парсим страницу каталога.
-        // На GitHub Pages, при включённой опции "можно просматривать файлы", отдаётся стандартная страница со ссылками.
-        // Для большей стабильности делаем запрос к текущему пути './' и извлекаем все .html ссылки, исключая текущий файл.
-        
         async function fetchHtmlFilesFromDirectory() {
-            // определяем текущий базовый путь (директория, где находится index.html)
             let basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-            // если путь пустой (корень), то используем './'
             const directoryUrl = basePath || './';
             
             try {
-                // делаем запрос к текущей директории, получаем HTML листинг
                 const response = await fetch(directoryUrl, {
                     cache: 'no-store',
-                    headers: {
-                        'Cache-Control': 'no-cache'
-                    }
+                    headers: { 'Cache-Control': 'no-cache' }
                 });
                 if (!response.ok) {
-                    throw new Error(`HTTP ${response.status} - не удалось получить список директории`);
+                    throw new Error(`HTTP ${response.status} - листинг недоступен`);
                 }
                 const htmlText = await response.text();
-                // парсим HTML-строку, ищем все ссылки на .html файлы
                 const parser = new DOMParser();
                 const doc = parser.parseFromString(htmlText, 'text/html');
                 const anchors = doc.querySelectorAll('a');
@@ -489,63 +461,41 @@
                 for (let anchor of anchors) {
                     let href = anchor.getAttribute('href');
                     if (!href) continue;
-                    // декодируем URL (некоторые могут быть закодированы)
                     let decodedHref = decodeURIComponent(href);
-                    // убираем возможные параметры и якоря
                     if (decodedHref.includes('?')) decodedHref = decodedHref.split('?')[0];
                     if (decodedHref.includes('#')) decodedHref = decodedHref.split('#')[0];
                     
-                    // проверяем, что это .html файл (заканчивается на .html, также возможен .htm, но для чистоты .html)
                     if (decodedHref.toLowerCase().endsWith('.html')) {
-                        // избавляемся от слешей в начале если есть
                         let cleanName = decodedHref;
                         if (cleanName.startsWith('./')) cleanName = cleanName.substring(2);
                         if (cleanName.startsWith('/')) cleanName = cleanName.substring(1);
-                        // исключаем текущий активный файл (сам index.html)
                         if (cleanName.toLowerCase() !== currentFileNormalized && cleanName.trim() !== '') {
-                            // дополнительная проверка на валидность имени (не пустое и не внешняя ссылка)
                             if (!cleanName.includes('://') && !cleanName.startsWith('http')) {
                                 foundFiles.add(cleanName);
                             }
                         }
                     }
                 }
-                // преобразуем Set в массив и сортируем по алфавиту для наглядности
                 let filesArray = Array.from(foundFiles);
                 filesArray.sort((a,b) => a.localeCompare(b));
                 return filesArray;
             } catch (err) {
-                console.warn('Не удалось получить листинг через директорию:', err);
-                // Второй метод (резервный): если по какой-то причине запрос к папке не дал списка,
-                // мы не можем гарантировать автоматическое определение, но предоставим возможность
-                // использовать "ручное добавление" или покажем подсказку.
-                // Однако, можно еще попробовать альтернативный подход: извлечь из ссылок текущей страницы?
-                // Но более правильно – предложить пользователю явно указать, либо ждать.
-                // Так как это GitHub Pages, в 99% случаев метод с fetch директории работает.
-                // Для максимальной совместимости, если ошибка, возвращаем пустой массив и покажем рекомендацию.
+                console.warn('Ошибка получения листинга:', err);
                 return [];
             }
         }
         
-        // также пробуем альтернативный fallback: иногда в GitHub Pages включена опция "index" не отдаёт листинг,
-        // но мы дополнительно можем попробовать получить файлы через статический манифест? Нет.
-        // В таком случае предложим пользователю создать файл .nojekyll и убедиться, что опция листинга включена.
-        // Покажем дружелюбное сообщение.
-        
         async function updateGallery() {
-            // показать загрузку
             showLoadingState(true);
             let htmlFiles = [];
             try {
                 htmlFiles = await fetchHtmlFilesFromDirectory();
             } catch (globalErr) {
-                console.error("Ошибка при сборе файлов:", globalErr);
+                console.error("Критическая ошибка:", globalErr);
                 htmlFiles = [];
             }
-            // если по какой-то причине результат null или не массив
             if (!Array.isArray(htmlFiles)) htmlFiles = [];
             
-            // дополнительная фильтрация: удалить дубликаты, которые могли попасть из-за регистра
             const unique = [];
             const lowerMap = new Map();
             for (const file of htmlFiles) {
@@ -555,12 +505,10 @@
                     unique.push(file);
                 }
             }
-            // после всех ухищрений финальный массив
             const finalFiles = unique.filter(f => f !== 'index.html' && f !== './index.html' && f !== '/index.html');
             renderFileList(finalFiles);
         }
         
-        // обработчик ручного обновления
         const refreshBtn = document.getElementById('manualRefreshBtn');
         if (refreshBtn) {
             refreshBtn.addEventListener('click', (e) => {
@@ -569,26 +517,20 @@
             });
         }
         
-        // инициализация при загрузке страницы
         updateGallery().catch(err => {
-            console.error("неудачный стартовый сбор:", err);
+            console.error("Ошибка инициализации:", err);
             galleryContainer.innerHTML = `
                 <div class="empty-message" style="grid-column:1/-1;">
-                    <div class="emoji-hint">⚠️🌙⚠️</div>
-                    <p>Не удалось автоматически определить файлы .html</p>
-                    <p>Убедитесь, что репозиторий GitHub Pages разрешает просмотр содержимого папок (обычно работает).<br>
-                    Нажмите «Обновить список» или проверьте, что в папке есть другие .html документы.</p>
-                    <button id="retryBtn" style="margin-top:12px; background:#2a2a3a; border:1px solid #aaa; padding:6px 18px; border-radius:28px; color:white; cursor:pointer;">⟳ Повторить попытку</button>
+                    <p>[ ОШИБКА ] НЕ УДАЛОСЬ ПРОСКАНИРОВАТЬ ДИРЕКТОРИЮ</p>
+                    <p>УБЕДИТЕСЬ, ЧТО ХОСТИНГ РАЗРЕШАЕТ ПРОСМОТР ФАЙЛОВ (ЛИСТИНГ)<br>
+                    ИЛИ НАЖМИТЕ [ СКАНИРОВАТЬ ] ПОВТОРНО</p>
+                    <button id="retryBtn" style="margin-top:12px; background:#1a0101; border:1px solid #8b2a2a; padding:6px 18px; font-family:monospace; color:#bb6a6a; cursor:pointer;">[ ПОВТОР ]</button>
                 </div>
             `;
             const retry = document.getElementById('retryBtn');
             if (retry) retry.addEventListener('click', () => updateGallery());
             fileCountSpan.innerText = '0';
         });
-        
-        // небольшой эстетический момент: если пользователь нажал на карточку, сохраняем ощущение
-        // также добавим "динамический title"
-        document.title = "Галерея Стасона · портал";
     })();
 </script>
 </body>
