@@ -37,6 +37,40 @@
             z-index: 0;
         }
 
+        /* Кнопка НАЗАД за пределами карточки, слева сверху */
+        .back-button {
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
+            font-family: 'Courier New', monospace;
+            background: #1f1010cc;
+            backdrop-filter: blur(4px);
+            border: 1px solid #b14f4f;
+            border-radius: 30px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #e6a1a1;
+            text-decoration: none;
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px rgba(180, 70, 70, 0.5);
+            cursor: pointer;
+        }
+
+        .back-button:hover {
+            background: #3a1c1ccc;
+            border-color: #e07a7a;
+            color: #ffcd94;
+            box-shadow: 0 0 12px #dd7a7a;
+            transform: scale(1.02);
+        }
+
+        .back-button:active {
+            transform: scale(0.98);
+        }
+
         .stalker-card {
             max-width: 920px;
             width: 100%;
@@ -185,6 +219,12 @@
                 width: 120px;
                 height: 120px;
             }
+            .back-button {
+                top: 12px;
+                left: 12px;
+                padding: 0.3rem 0.9rem;
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -261,7 +301,6 @@
             border-left: 3px solid #e07a7a;
         }
 
-        /* Секция детства */
         .childhood-section {
             margin-top: 1.8rem;
             margin-bottom: 1rem;
@@ -333,6 +372,10 @@
     </style>
 </head>
 <body>
+
+    <!-- Кнопка НАЗАД, открывающая файл Сталкер.html -->
+    <a href="Сталкер.html" class="back-button">[НАЗАД]</a>
+
     <div class="stalker-card">
         <div class="header">
             <h1>СТАЛКЕР</h1>
@@ -372,7 +415,6 @@
             </div>
         </div>
 
-        <!-- Блок "ДЕТСТВО" с биографией -->
         <div class="childhood-section">
             <div class="childhood-header">[ДЕТСТВО]</div>
             <div class="childhood-text">
