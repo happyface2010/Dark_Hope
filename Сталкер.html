@@ -12,7 +12,7 @@
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #0a0f0a, #030503);
+            background: radial-gradient(circle at 20% 30%, #2a0a0a, #1a0303);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -21,7 +21,7 @@
             padding: 1.5rem;
         }
 
-        /* Эффект "кинескопа" (слабые линии) */
+        /* Эффект "кинескопа" (слабые линии) красноватый */
         body::before {
             content: "";
             position: fixed;
@@ -29,39 +29,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(0, 255, 0, 0.02) 0px, rgba(0, 255, 0, 0.02) 2px, transparent 2px, transparent 6px);
+            background: repeating-linear-gradient(0deg, rgba(180, 30, 30, 0.08) 0px, rgba(180, 30, 30, 0.08) 2px, transparent 2px, transparent 6px);
             pointer-events: none;
             z-index: 1;
         }
 
-        /* Окно терминала */
+        /* Окно терминала — тёмно-красная тема */
         .terminal {
             max-width: 1400px;
             width: 100%;
-            background: #0b0e0b;
+            background: #140808;
             border-radius: 16px;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.6), 0 0 0 1px #1e3a1e, 0 0 0 3px #0a2f0a, 0 0 15px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px #6a2a2a, 0 0 0 3px #3a1515, 0 0 15px rgba(180, 30, 30, 0.4);
             overflow: hidden;
             backdrop-filter: blur(0.5px);
             transition: all 0.2s ease;
         }
 
-        /* Верхняя панель (как у терминала) — изменена */
+        /* Верхняя панель — тёмно-красный */
         .terminal-header {
-            background: #1a211a;
+            background: #2a1414;
             padding: 0.7rem 1.2rem;
             display: flex;
             align-items: center;
             gap: 12px;
-            border-bottom: 1px solid #2c462c;
-            box-shadow: inset 0 1px 0 #2e442e, 0 1px 0 #0f1a0f;
+            border-bottom: 1px solid #6a2a2a;
+            box-shadow: inset 0 1px 0 #4a1e1e, 0 1px 0 #2a0e0e;
         }
 
-        /* Стиль кнопки НАЗАД */
+        /* Стиль кнопки НАЗАД в тёмно-красной гамме */
         .back-button {
-            background: #0f140f;
-            border: 1px solid #3b6e3b;
-            color: #b3ffb3;
+            background: #1f0c0c;
+            border: 1px solid #8a3a3a;
+            color: #ffaaaa;
             font-family: 'Courier New', monospace;
             font-size: 0.85rem;
             font-weight: bold;
@@ -73,14 +73,14 @@
             letter-spacing: 1px;
             text-decoration: none;
             display: inline-block;
-            box-shadow: 0 0 3px rgba(0, 255, 0, 0.3);
+            box-shadow: 0 0 3px rgba(200, 50, 50, 0.4);
         }
 
         .back-button:hover {
-            background: #1f3a1f;
-            border-color: #6eff6e;
-            color: #e5ffe5;
-            box-shadow: 0 0 8px #3eff3e;
+            background: #3a1818;
+            border-color: #cc5e5e;
+            color: #ffcccc;
+            box-shadow: 0 0 10px #aa3a3a;
             transform: scale(1.02);
         }
 
@@ -89,20 +89,20 @@
         }
 
         .terminal-title {
-            color: #8bc34a;
+            color: #d68b8b;
             font-size: 0.85rem;
             letter-spacing: 0.5px;
-            background: #0f130f;
+            background: #1f0f0f;
             padding: 0.2rem 1rem;
             border-radius: 30px;
             font-weight: 500;
-            border: 1px solid #2e552e;
-            box-shadow: inset 0 0 3px #1f3a1f;
+            border: 1px solid #6a2a2a;
+            box-shadow: inset 0 0 3px #4a1a1a;
         }
 
         .terminal-title i {
             font-style: normal;
-            color: #b3ff9b;
+            color: #ffb3b3;
         }
 
         /* Основное тело */
@@ -114,15 +114,15 @@
             justify-content: space-between;
         }
 
-        /* Левая колонка — логотип прижат к верху */
+        /* Левая колонка — тёмно-красный фон */
         .ascii-scp {
             flex: 1.2;
             min-width: 280px;
-            background: #050805;
+            background: #120808;
             border-radius: 12px;
             padding: 1rem 0.8rem 1.2rem 0.8rem;
-            border: 1px solid #2c4a2c;
-            box-shadow: inset 0 0 18px rgba(0, 20, 0, 0.8), 0 4px 12px black;
+            border: 1px solid #6a2a2a;
+            box-shadow: inset 0 0 18px rgba(100, 20, 20, 0.6), 0 4px 12px black;
             transition: all 0.2s;
             display: flex;
             flex-direction: column;
@@ -132,16 +132,16 @@
         }
 
         .ascii-scp:hover {
-            border-color: #6eff6e;
-            box-shadow: 0 0 18px rgba(80, 255, 80, 0.2);
+            border-color: #cc5e5e;
+            box-shadow: 0 0 18px rgba(200, 50, 50, 0.3);
         }
 
-        /* Стилизованный логотип SCP (текстовый) */
+        /* Стилизованный логотип SCP (текстовый) красные оттенки */
         .scp-logo {
             font-family: 'Courier New', monospace;
             font-weight: bold;
-            color: #3eff3e;
-            text-shadow: 0 0 8px #1aff1a, 0 0 2px #0f0;
+            color: #e68989;
+            text-shadow: 0 0 8px #aa3a3a, 0 0 2px #ff8888;
             margin-bottom: 1rem;
         }
 
@@ -161,7 +161,7 @@
         .scp-dots {
             font-size: 2rem;
             letter-spacing: 12px;
-            color: #5eff5e;
+            color: #cc7a7a;
             margin-top: -0.3rem;
         }
 
@@ -170,8 +170,8 @@
             font-size: 0.85rem;
             letter-spacing: 2px;
             text-transform: uppercase;
-            color: #8bc34a;
-            border-top: 1px dashed #3a753a;
+            color: #b46a6a;
+            border-top: 1px dashed #8a3a3a;
             padding-top: 1rem;
             display: inline-block;
             width: 100%;
@@ -180,7 +180,7 @@
         .scp-motto span {
             display: block;
             font-weight: bold;
-            color: #b3ff9f;
+            color: #ffb3b3;
             font-size: 1rem;
             margin-bottom: 0.4rem;
         }
@@ -188,9 +188,9 @@
         /* Стиль кнопки-ссылки личного дела */
         .personal-file-link {
             margin-top: 1.5rem;
-            background: #0f140f;
-            border: 1px solid #3b6e3b;
-            color: #b3ffb3;
+            background: #1f0c0c;
+            border: 1px solid #8a3a3a;
+            color: #ffaaaa;
             font-family: 'Courier New', monospace;
             font-size: 0.9rem;
             font-weight: bold;
@@ -200,17 +200,17 @@
             transition: all 0.2s ease;
             text-transform: uppercase;
             letter-spacing: 1px;
-            box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+            box-shadow: 0 0 5px rgba(180, 40, 40, 0.4);
             backdrop-filter: blur(2px);
             text-decoration: none;
             display: inline-block;
         }
 
         .personal-file-link:hover {
-            background: #1f3a1f;
-            border-color: #6eff6e;
-            color: #e5ffe5;
-            box-shadow: 0 0 12px #3eff3e;
+            background: #3a1818;
+            border-color: #cc5e5e;
+            color: #ffcccc;
+            box-shadow: 0 0 12px #aa3a3a;
             transform: scale(1.02);
         }
 
@@ -222,10 +222,10 @@
         .info-stalker {
             flex: 1;
             min-width: 320px;
-            background: rgba(8, 12, 8, 0.7);
+            background: rgba(20, 8, 8, 0.85);
             border-radius: 14px;
             padding: 1.4rem 1.8rem;
-            border-left: 2px solid #3b6e3b;
+            border-left: 2px solid #8a3a3a;
             backdrop-filter: blur(2px);
         }
 
@@ -234,19 +234,19 @@
             font-weight: 800;
             letter-spacing: 6px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #b3ffb3, #5eff5e, #1c9e1c);
+            background: linear-gradient(135deg, #ffaaaa, #e66a6a, #aa3a3a);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            text-shadow: 0 0 12px #00cc33;
+            text-shadow: 0 0 12px #aa3a3a;
             margin-bottom: 0.5rem;
-            border-bottom: 2px solid #5c9e5c;
+            border-bottom: 2px solid #aa5a5a;
             display: inline-block;
             padding-right: 1rem;
         }
 
         .stalker-sub {
-            color: #7ab87a;
+            color: #c28282;
             font-size: 0.75rem;
             margin-bottom: 1.8rem;
             letter-spacing: 1px;
@@ -265,7 +265,7 @@
             align-items: baseline;
             margin: 0.4rem 0;
             font-size: 0.9rem;
-            border-bottom: 1px dotted #2a452a;
+            border-bottom: 1px dotted #6a2e2e;
             padding: 0.2rem 0;
         }
 
@@ -278,7 +278,7 @@
 
         .neofetch-key {
             font-weight: bold;
-            color: #c2ff8f;
+            color: #e6a2a2;
             min-width: 110px;
             letter-spacing: 0.4px;
             text-transform: uppercase;
@@ -286,7 +286,7 @@
         }
 
         .neofetch-value {
-            color: #b3ffb3;
+            color: #ffc2c2;
             font-weight: 500;
             word-break: break-word;
         }
@@ -302,16 +302,16 @@
         .user-host {
             font-size: 1.2rem;
             margin: 0.7rem 0 0.2rem;
-            color: #9eff9e;
-            background: #0c140c;
+            color: #ffbfbf;
+            background: #1a0c0c;
             display: inline-block;
             padding: 0.2rem 0.8rem;
             border-radius: 30px;
-            border: 1px solid #3a723a;
+            border: 1px solid #8a3a3a;
         }
 
         .separator {
-            color: #4f9a4f;
+            color: #aa5a5a;
             margin: 0.6rem 0;
             letter-spacing: 2px;
         }
@@ -320,10 +320,10 @@
             display: inline-block;
             width: 12px;
             height: 18px;
-            background-color: #3eff3e;
+            background-color: #e66a6a;
             vertical-align: middle;
             margin-left: 8px;
-            box-shadow: 0 0 6px #0f0;
+            box-shadow: 0 0 6px #ff8888;
             animation: blink 1s step-end infinite;
         }
 
@@ -376,7 +376,7 @@
         </div>
     </div>
     <div class="terminal-body">
-        <!-- Левая колонка: логотип SCP прижат к верху -->
+        <!-- Левая колонка: логотип SCP -->
         <div class="ascii-scp">
             <div class="scp-logo">
                 <div class="scp-letters">S.C.P.</div>
@@ -386,7 +386,7 @@
                 <span>SECURE, CONTAIN, PROTECT</span>
                 ────◆────
             </div>
-            <!-- Функциональная ссылка (открывает другой HTML файл) -->
+            <!-- Функциональная ссылка (открывает personal_file.html) -->
             <a href="Личное дело.html" class="personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
         </div>
 
@@ -445,7 +445,7 @@
                 <div class="empty-line"></div>
             </div>
 
-            <div style="margin-top: 1.5rem; font-size: 0.75rem; border-top: 1px solid #2c542c; padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
+            <div style="margin-top: 1.5rem; font-size: 0.75rem; border-top: 1px solid #6a2a2a; padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
                 <span>🔻 SCP FOUNDATION | ЗОНА ОТЧУЖДЕНИЯ</span>
                 <span>⚠️ stalker@scp: ~ $ <span class="cursor-blink"></span></span>
             </div>
