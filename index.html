@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>Галерея Стасона | Тёмно-красный терминал</title>
+    <title>Архив Фонда | Терминал</title>
     <style>
         * {
             margin: 0;
@@ -151,13 +151,9 @@
             font-family: 'Courier New', monospace;
         }
 
+        /* субтитр удалён по требованию */
         .sub {
-            font-size: 0.85rem;
-            margin-top: 0.5rem;
-            opacity: 0.8;
-            font-family: monospace;
-            letter-spacing: 2px;
-            color: #9b4a4a;
+            display: none;
         }
 
         .status-panel {
@@ -350,8 +346,8 @@
 
 <div class="content">
     <div class="hero">
-        <h1>[ГАЛЕРЕЯ СТАСОНА]</h1>
-        <div class="sub">// ТЁМНО-КРАСНЫЙ ТЕРМИНАЛ // ЦИФРОВОЙ АРХИВ //</div>
+        <h1>[АРХИВ ФОНДА]</h1>
+        <div class="sub"></div>
     </div>
 
     <div class="status-panel">
@@ -369,8 +365,7 @@
         </div>
     </div>
     <footer>
-        АВТОМАТИЧЕСКОЕ ОБНАРУЖЕНИЕ .html В ТЕКУЩЕМ КАТАЛОГЕ<br>
-        [ СТИЛЬ: ТЁМНО-КРАСНЫЙ / ПОЛУПРОЗРАЧНЫЙ БЕЛЫЙ ШУМ / ОСТРЫЕ ГРАНИ ]
+        ЕСЛИ ВАШ УРОВЕНЬ ДОСТУПА НИЖЕ 4, ПОЖАЛУЙСТА, СООБЩИТЕ О ТОМ, ЧТО УВИДЕЛИ, АДМИНИСТРАЦИИ ВАШЕГО КОМПЛЕКСА
     </footer>
 </div>
 
@@ -399,9 +394,7 @@
             if (!htmlFiles.length) {
                 galleryContainer.innerHTML = `
                     <div class="empty-message" style="grid-column:1/-1;">
-                        <p>// СТАТУС: НЕТ ДОПОЛНИТЕЛЬНЫХ HTML-ФАЙЛОВ //</p>
-                        <p style="font-size:0.8rem; margin-top:10px;">РАЗМЕСТИТЕ ФАЙЛЫ .html В ЭТОЙ ПАПКЕ (КРОМЕ INDEX.HTML)</p>
-                        <p style="font-size:0.7rem;">ИСПОЛЬЗУЙТЕ [ СКАНИРОВАТЬ ] ДЛЯ ОБНОВЛЕНИЯ</p>
+                        <p>[ФАЙЛЫ НЕ ОБНАРУЖЕНЫ]</p>
                     </div>
                 `;
                 fileCountSpan.innerText = '0';
