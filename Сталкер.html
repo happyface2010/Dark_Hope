@@ -221,7 +221,7 @@
             padding: 0.2rem 0;
         }
 
-        /* Для строки "МЕСТО РАБОТЫ:" делаем вертикальное расположение */
+        /* Для строк, где ключ и значение на разных строках */
         .neofetch-line.multiline {
             flex-direction: column;
             align-items: flex-start;
@@ -304,7 +304,6 @@
                 flex-direction: column;
                 gap: 0.2rem;
             }
-            /* Для мобилок убираем специальную настройку, т.к. все и так колонкой */
             .neofetch-line.multiline {
                 flex-direction: column;
             }
@@ -351,14 +350,15 @@
             <div class="separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
 
             <div class="neofetch-block">
-                <!-- Заменяем строку ОС на МЕСТО РАБОТЫ: с двумя строками -->
+                <!-- МЕСТО РАБОТЫ: -->
                 <div class="neofetch-line multiline">
                     <span class="neofetch-key">МЕСТО РАБОТЫ:</span>
                     <span class="neofetch-value">«Зона-53»</span>
                 </div>
-                <div class="neofetch-line">
-                    <span class="neofetch-key">Ядро:</span>
-                    <span class="neofetch-value">4.17.4-SCP-ANOMALY</span>
+                <!-- Группа: (заменяет Ядро) -->
+                <div class="neofetch-line multiline">
+                    <span class="neofetch-key">Группа:</span>
+                    <span class="neofetch-value">М.О.Г. Альфа-9</span>
                 </div>
                 <div class="neofetch-line">
                     <span class="neofetch-key">Время работы:</span>
