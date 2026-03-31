@@ -185,9 +185,8 @@
             margin-bottom: 0.4rem;
         }
 
-        /* Стиль кнопки-ссылки личного дела */
-        .personal-file-link {
-            margin-top: 1.5rem;
+        /* Общий стиль для кнопок-ссылок */
+        .action-link {
             background: #1f0c0c;
             border: 1px solid #8a3a3a;
             color: #ffaaaa;
@@ -204,9 +203,10 @@
             backdrop-filter: blur(2px);
             text-decoration: none;
             display: inline-block;
+            margin-top: 1rem;
         }
 
-        .personal-file-link:hover {
+        .action-link:hover {
             background: #3a1818;
             border-color: #cc5e5e;
             color: #ffcccc;
@@ -214,8 +214,18 @@
             transform: scale(1.02);
         }
 
-        .personal-file-link:active {
+        .action-link:active {
             transform: scale(0.98);
+        }
+
+        /* Отдельный класс для кнопки личного дела (чтобы сохранить отступ) */
+        .personal-file-link {
+            margin-top: 1.5rem;
+        }
+
+        /* Кнопка SCP-1921 идёт следом */
+        .scp-link {
+            margin-top: 0.8rem;
         }
 
         /* Правая колонка */
@@ -386,8 +396,10 @@
                 <span>SECURE, CONTAIN, PROTECT</span>
                 ────◆────
             </div>
-            <!-- Функциональная ссылка (открывает personal_file.html) -->
-            <a href="Личное дело.html" class="personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
+            <!-- Кнопка ЛИЧНОЕ ДЕЛО -->
+            <a href="Личное дело.html" class="action-link personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
+            <!-- Новая кнопка SCP-1921 -->
+            <a href="SCP-1921.html" class="action-link scp-link">[SCP-1921]</a>
         </div>
 
         <!-- Правая колонка -->
