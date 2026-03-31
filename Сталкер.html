@@ -46,7 +46,7 @@
             transition: all 0.2s ease;
         }
 
-        /* Верхняя панель (как у терминала) */
+        /* Верхняя панель (как у терминала) — изменена */
         .terminal-header {
             background: #1a211a;
             padding: 0.7rem 1.2rem;
@@ -57,21 +57,36 @@
             box-shadow: inset 0 1px 0 #2e442e, 0 1px 0 #0f1a0f;
         }
 
-        .window-buttons {
-            display: flex;
-            gap: 8px;
+        /* Стиль кнопки НАЗАД */
+        .back-button {
+            background: #0f140f;
+            border: 1px solid #3b6e3b;
+            color: #b3ffb3;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: bold;
+            padding: 0.2rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            text-decoration: none;
+            display: inline-block;
+            box-shadow: 0 0 3px rgba(0, 255, 0, 0.3);
         }
 
-        .win-btn {
-            width: 14px;
-            height: 14px;
-            border-radius: 50%;
-            transition: 0.1s linear;
+        .back-button:hover {
+            background: #1f3a1f;
+            border-color: #6eff6e;
+            color: #e5ffe5;
+            box-shadow: 0 0 8px #3eff3e;
+            transform: scale(1.02);
         }
 
-        .close { background: #e34f4f; box-shadow: 0 0 2px #ff7b7b; }
-        .minimize { background: #e9b35f; box-shadow: 0 0 2px #ffc97a; }
-        .maximize { background: #6fcf6f; box-shadow: 0 0 2px #8eff8e; }
+        .back-button:active {
+            transform: scale(0.98);
+        }
 
         .terminal-title {
             color: #8bc34a;
@@ -170,7 +185,7 @@
             margin-bottom: 0.4rem;
         }
 
-        /* Стиль кнопки-ссылки */
+        /* Стиль кнопки-ссылки личного дела */
         .personal-file-link {
             margin-top: 1.5rem;
             background: #0f140f;
@@ -354,11 +369,8 @@
 <body>
 <div class="terminal">
     <div class="terminal-header">
-        <div class="window-buttons">
-            <div class="win-btn close"></div>
-            <div class="win-btn minimize"></div>
-            <div class="win-btn maximize"></div>
-        </div>
+        <!-- Кнопка НАЗАД вместо цветных точек -->
+        <a href="index.html" class="back-button">[НАЗАД]</a>
         <div class="terminal-title">
             <i>stalker@scp-found:~</i> — ZONE TERMINAL v.ANOM
         </div>
@@ -375,7 +387,7 @@
                 ────◆────
             </div>
             <!-- Функциональная ссылка (открывает другой HTML файл) -->
-            <a href="Личное дело.html" class="personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
+            <a href="personal_file.html" class="personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
         </div>
 
         <!-- Правая колонка -->
