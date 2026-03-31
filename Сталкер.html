@@ -170,6 +170,37 @@
             margin-bottom: 0.4rem;
         }
 
+        /* Стиль кнопки */
+        .personal-file-btn {
+            margin-top: 1.5rem;
+            background: #0f140f;
+            border: 1px solid #3b6e3b;
+            color: #b3ffb3;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9rem;
+            font-weight: bold;
+            padding: 0.5rem 1rem;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
+            backdrop-filter: blur(2px);
+        }
+
+        .personal-file-btn:hover {
+            background: #1f3a1f;
+            border-color: #6eff6e;
+            color: #e5ffe5;
+            box-shadow: 0 0 12px #3eff3e;
+            transform: scale(1.02);
+        }
+
+        .personal-file-btn:active {
+            transform: scale(0.98);
+        }
+
         /* Правая колонка */
         .info-stalker {
             flex: 1;
@@ -341,6 +372,8 @@
                 <span>SECURE, CONTAIN, PROTECT</span>
                 ────◆────
             </div>
+            <!-- Функциональная кнопка -->
+            <button class="personal-file-btn" id="personalFileBtn">[ЛИЧНОЕ ДЕЛО]</button>
         </div>
 
         <!-- Правая колонка -->
@@ -388,7 +421,7 @@
                     <span class="neofetch-value">5</span>
                 </div>
 
-                <!-- 7 пустых строк для сохранения пространства (вместо удалённых ранее строк) -->
+                <!-- 7 пустых строк для сохранения пространства -->
                 <div class="empty-line"></div>
                 <div class="empty-line"></div>
                 <div class="empty-line"></div>
@@ -396,8 +429,6 @@
                 <div class="empty-line"></div>
                 <div class="empty-line"></div>
                 <div class="empty-line"></div>
-
-                <!-- строка "Риск эмиссии" удалена полностью -->
             </div>
 
             <div style="margin-top: 1.5rem; font-size: 0.75rem; border-top: 1px solid #2c542c; padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
@@ -407,5 +438,13 @@
         </div>
     </div>
 </div>
+
+<script>
+    // Функциональность кнопки "ЛИЧНОЕ ДЕЛО"
+    document.getElementById('personalFileBtn').addEventListener('click', function() {
+        alert('ДОСТУП К ЛИЧНОМУ ДЕЛУ\n\nИмя: Happy Facen\nМесто работы: Зона-53\nГруппа: М.О.Г. Альфа-9\nДолжность: Лейтенант\nУровень доступа: 5');
+        // В реальном проекте здесь можно открыть модальное окно или перейти на другую страницу
+    });
+</script>
 </body>
 </html>
