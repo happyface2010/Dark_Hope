@@ -106,7 +106,6 @@
             mix-blend-mode: normal;
         }
 
-        /* дополнительный слой зернистости для усиления эффекта */
         .grain-overlay {
             position: fixed;
             top: 0;
@@ -151,7 +150,6 @@
             font-family: 'Courier New', monospace;
         }
 
-        /* субтитр удалён по требованию */
         .sub {
             display: none;
         }
@@ -359,11 +357,7 @@
         </div>
     </div>
 
-    <div id="galleryContainer" class="gallery-grid">
-        <div class="empty-message" style="grid-column:1/-1;">
-            <p>СКАНИРОВАНИЕ HTML-ФАЙЛОВ ...</p>
-        </div>
-    </div>
+    <div id="galleryContainer" class="gallery-grid"></div>
     <footer>
         ЕСЛИ ВАШ УРОВЕНЬ ДОСТУПА НИЖЕ 4, ПОЖАЛУЙСТА, СООБЩИТЕ О ТОМ, ЧТО УВИДЕЛИ, АДМИНИСТРАЦИИ ВАШЕГО КОМПЛЕКСА
     </footer>
@@ -371,27 +365,18 @@
 
 <script>
     (function() {
+        // Список известных файлов (можно расширять)
+        const KNOWN_FILES = [
+            "первый мой сайт.html"
+        ];
+
         const galleryContainer = document.getElementById('galleryContainer');
         const fileCountSpan = document.getElementById('fileCount');
 
-        function clearContainer() {
+        function renderFileList(fileList) {
             galleryContainer.innerHTML = '';
-        }
 
-        function showLoadingState(isLoading = true) {
-            if (isLoading) {
-                galleryContainer.innerHTML = `
-                    <div class="empty-message" style="grid-column:1/-1;">
-                        <p>[ АНАЛИЗ ДИРЕКТОРИИ ] ... ПОИСК .HTML</p>
-                        <small style="opacity:0.7">ЗАПРОС СПИСКА ЧЕРЕЗ API ХОСТИНГА</small>
-                    </div>
-                `;
-            }
-        }
-
-        function renderFileList(htmlFiles) {
-            clearContainer();
-            if (!htmlFiles.length) {
+            if (!fileList.length) {
                 galleryContainer.innerHTML = `
                     <div class="empty-message" style="grid-column:1/-1;">
                         <p>[ФАЙЛЫ НЕ ОБНАРУЖЕНЫ]</p>
@@ -401,8 +386,9 @@
                 return;
             }
 
-            fileCountSpan.innerText = htmlFiles.length;
-            for (let fileName of htmlFiles) {
+            fileCountSpan.innerText = fileList.length;
+
+            for (let fileName of fileList) {
                 const card = document.createElement('a');
                 card.className = 'file-card';
                 card.href = fileName;
@@ -410,120 +396,35 @@
 
                 const iconSpan = document.createElement('div');
                 iconSpan.className = 'file-icon';
-                iconSpan.innerHTML = '[HTML]';  
+                iconSpan.innerHTML = '[HTML]';
 
                 const nameSpan = document.createElement('div');
                 nameSpan.className = 'file-name';
                 nameSpan.innerText = fileName;
-                
+
                 const badgeDiv = document.createElement('div');
                 badgeDiv.className = 'file-badge';
                 badgeDiv.innerHTML = `<span class="badge-html">[ .HTML ]</span> <span>[ ПЕРЕХОД ]</span>`;
-                
+
                 card.appendChild(iconSpan);
                 card.appendChild(nameSpan);
                 card.appendChild(badgeDiv);
-                
-                card.addEventListener('click', (e) => {
-                    console.log(`Переход: ${fileName}`);
-                });
+
                 galleryContainer.appendChild(card);
             }
         }
 
-        async function fetchHtmlFilesFromDirectory() {
-            let basePath = window.location.pathname.substring(0, window.location.pathname.lastIndexOf('/') + 1);
-            const directoryUrl = basePath || './';
-            
-            try {
-                const response = await fetch(directoryUrl, {
-                    cache: 'no-store',
-                    headers: { 'Cache-Control': 'no-cache' }
-                });
-                if (!response.ok) {
-                    throw new Error(`HTTP ${response.status} - листинг недоступен`);
-                }
-                const htmlText = await response.text();
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                const anchors = doc.querySelectorAll('a');
-                const currentFileName = window.location.pathname.split('/').pop() || 'index.html';
-                const currentFileNormalized = currentFileName.toLowerCase();
-                
-                const foundFiles = new Set();
-                for (let anchor of anchors) {
-                    let href = anchor.getAttribute('href');
-                    if (!href) continue;
-                    let decodedHref = decodeURIComponent(href);
-                    if (decodedHref.includes('?')) decodedHref = decodedHref.split('?')[0];
-                    if (decodedHref.includes('#')) decodedHref = decodedHref.split('#')[0];
-                    
-                    if (decodedHref.toLowerCase().endsWith('.html')) {
-                        let cleanName = decodedHref;
-                        if (cleanName.startsWith('./')) cleanName = cleanName.substring(2);
-                        if (cleanName.startsWith('/')) cleanName = cleanName.substring(1);
-                        if (cleanName.toLowerCase() !== currentFileNormalized && cleanName.trim() !== '') {
-                            if (!cleanName.includes('://') && !cleanName.startsWith('http')) {
-                                foundFiles.add(cleanName);
-                            }
-                        }
-                    }
-                }
-                let filesArray = Array.from(foundFiles);
-                filesArray.sort((a,b) => a.localeCompare(b));
-                return filesArray;
-            } catch (err) {
-                console.warn('Ошибка получения листинга:', err);
-                return [];
-            }
+        function initGallery() {
+            const validFiles = KNOWN_FILES.filter(name => name && typeof name === 'string' && name.trim().length > 0);
+            renderFileList(validFiles);
         }
-        
-        async function updateGallery() {
-            showLoadingState(true);
-            let htmlFiles = [];
-            try {
-                htmlFiles = await fetchHtmlFilesFromDirectory();
-            } catch (globalErr) {
-                console.error("Критическая ошибка:", globalErr);
-                htmlFiles = [];
-            }
-            if (!Array.isArray(htmlFiles)) htmlFiles = [];
-            
-            const unique = [];
-            const lowerMap = new Map();
-            for (const file of htmlFiles) {
-                const lower = file.toLowerCase();
-                if (!lowerMap.has(lower)) {
-                    lowerMap.set(lower, file);
-                    unique.push(file);
-                }
-            }
-            const finalFiles = unique.filter(f => f !== 'index.html' && f !== './index.html' && f !== '/index.html');
-            renderFileList(finalFiles);
-        }
-        
+
         const refreshBtn = document.getElementById('manualRefreshBtn');
         if (refreshBtn) {
-            refreshBtn.addEventListener('click', (e) => {
-                e.preventDefault();
-                updateGallery().catch(e => console.warn(e));
-            });
+            refreshBtn.addEventListener('click', () => initGallery());
         }
-        
-        updateGallery().catch(err => {
-            console.error("Ошибка инициализации:", err);
-            galleryContainer.innerHTML = `
-                <div class="empty-message" style="grid-column:1/-1;">
-                    <p>[ ОШИБКА ] НЕ УДАЛОСЬ ПРОСКАНИРОВАТЬ ДИРЕКТОРИЮ</p>
-                    <p>УБЕДИТЕСЬ, ЧТО ХОСТИНГ РАЗРЕШАЕТ ПРОСМОТР ФАЙЛОВ (ЛИСТИНГ)<br>
-                    ИЛИ НАЖМИТЕ [ СКАНИРОВАТЬ ] ПОВТОРНО</p>
-                    <button id="retryBtn" style="margin-top:12px; background:#1a0101; border:1px solid #8b2a2a; padding:6px 18px; font-family:monospace; color:#bb6a6a; cursor:pointer;">[ ПОВТОР ]</button>
-                </div>
-            `;
-            const retry = document.getElementById('retryBtn');
-            if (retry) retry.addEventListener('click', () => updateGallery());
-            fileCountSpan.innerText = '0';
-        });
+
+        initGallery();
     })();
 </script>
 </body>
