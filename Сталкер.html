@@ -170,8 +170,8 @@
             margin-bottom: 0.4rem;
         }
 
-        /* Стиль кнопки */
-        .personal-file-btn {
+        /* Стиль кнопки-ссылки */
+        .personal-file-link {
             margin-top: 1.5rem;
             background: #0f140f;
             border: 1px solid #3b6e3b;
@@ -187,9 +187,11 @@
             letter-spacing: 1px;
             box-shadow: 0 0 5px rgba(0, 255, 0, 0.2);
             backdrop-filter: blur(2px);
+            text-decoration: none;
+            display: inline-block;
         }
 
-        .personal-file-btn:hover {
+        .personal-file-link:hover {
             background: #1f3a1f;
             border-color: #6eff6e;
             color: #e5ffe5;
@@ -197,7 +199,7 @@
             transform: scale(1.02);
         }
 
-        .personal-file-btn:active {
+        .personal-file-link:active {
             transform: scale(0.98);
         }
 
@@ -372,8 +374,8 @@
                 <span>SECURE, CONTAIN, PROTECT</span>
                 ────◆────
             </div>
-            <!-- Функциональная кнопка -->
-            <button class="personal-file-btn" id="personalFileBtn">[ЛИЧНОЕ ДЕЛО]</button>
+            <!-- Функциональная ссылка (открывает другой HTML файл) -->
+            <a href="Личное дело.html" class="personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
         </div>
 
         <!-- Правая колонка -->
@@ -438,13 +440,5 @@
         </div>
     </div>
 </div>
-
-<script>
-    // Функциональность кнопки "ЛИЧНОЕ ДЕЛО"
-    document.getElementById('personalFileBtn').addEventListener('click', function() {
-        alert('ДОСТУП К ЛИЧНОМУ ДЕЛУ\n\nИмя: Happy Facen\nМесто работы: Зона-53\nГруппа: М.О.Г. Альфа-9\nДолжность: Лейтенант\nУровень доступа: 5');
-        // В реальном проекте здесь можно открыть модальное окно или перейти на другую страницу
-    });
-</script>
 </body>
 </html>
