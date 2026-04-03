@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
-    <title>SCP Foundation :: Сталкер терминал</title>
+    <title>СТАЛКЕР - Личное дело: Альфа-9</title>
     <style>
         * {
             margin: 0;
@@ -12,16 +12,17 @@
         }
 
         body {
-            background: radial-gradient(circle at 20% 30%, #1e102a, #0a0312);
             min-height: 100vh;
+            background: radial-gradient(circle at 20% 30%, #1a0a2a, #0a0110);
+            background-color: #05010a;
             display: flex;
-            justify-content: center;
             align-items: center;
-            font-family: 'Courier New', 'Fira Code', 'JetBrains Mono', monospace;
+            justify-content: center;
+            font-family: 'Courier New', 'Fira Code', 'Roboto Mono', 'Share Tech Mono', monospace;
             padding: 1.5rem;
+            position: relative;
         }
 
-        /* Эффект "кинескопа" (фиолетовые линии) */
         body::before {
             content: "";
             position: fixed;
@@ -29,58 +30,39 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: repeating-linear-gradient(0deg, rgba(128, 0, 255, 0.06) 0px, rgba(128, 0, 255, 0.06) 2px, transparent 2px, transparent 6px);
+            background-image: url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIzMDAiIGhlaWdodD0iMzAwIj48ZmlsdGVyIGlkPSJmIj48ZmVUdXJidWxlbmNlIHR5cGU9ImZyYWN0YWxOb2lzZSIgYmFzZUZyZXF1ZW5jeT0iLjciIG51bU9jdGF2ZXM9IjMiLz48L2ZpbHRlcj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWx0ZXI9InVybCgjZikiIG9wYWNpdHk9IjAuMjUiLz48L3N2Zz4=');
+            background-repeat: repeat;
+            opacity: 0.2;
             pointer-events: none;
-            z-index: 1;
+            z-index: 0;
         }
 
-        /* Окно терминала — тёмно-фиолетовая тема */
-        .terminal {
-            max-width: 1400px;
-            width: 100%;
-            background: #0f0918;
-            border-radius: 16px;
-            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.7), 0 0 0 1px #4a2a6a, 0 0 0 3px #2a153a, 0 0 15px rgba(128, 0, 255, 0.3);
-            overflow: hidden;
-            backdrop-filter: blur(0.5px);
-            transition: all 0.2s ease;
-        }
-
-        /* Верхняя панель — тёмно-фиолетовый */
-        .terminal-header {
-            background: #1e1328;
-            padding: 0.7rem 1.2rem;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-bottom: 1px solid #4a2a6a;
-            box-shadow: inset 0 1px 0 #3a1f4a, 0 1px 0 #1a0a24;
-        }
-
-        /* Стиль кнопки НАЗАД */
         .back-button {
-            background: #170f20;
-            border: 1px solid #6a3a8a;
-            color: #d4b3ff;
+            position: fixed;
+            top: 20px;
+            left: 20px;
+            z-index: 100;
             font-family: 'Courier New', monospace;
-            font-size: 0.85rem;
-            font-weight: bold;
-            padding: 0.2rem 1rem;
+            background: #1f102ccc;
+            backdrop-filter: blur(4px);
+            border: 1px solid #8a5fa3;
             border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
+            padding: 0.5rem 1.2rem;
+            font-size: 1rem;
+            font-weight: bold;
+            color: #d9b3ff;
             text-decoration: none;
-            display: inline-block;
-            box-shadow: 0 0 3px rgba(128, 0, 255, 0.4);
+            letter-spacing: 1px;
+            transition: all 0.2s ease;
+            box-shadow: 0 0 8px rgba(138, 95, 163, 0.5);
+            cursor: pointer;
         }
 
         .back-button:hover {
-            background: #2a1a3a;
-            border-color: #9a5acf;
-            color: #f0e0ff;
-            box-shadow: 0 0 10px #9a4aff;
+            background: #2e1a3ccc;
+            border-color: #b77fdb;
+            color: #f0d6ff;
+            box-shadow: 0 0 12px #b77fdb;
             transform: scale(1.02);
         }
 
@@ -88,363 +70,463 @@
             transform: scale(0.98);
         }
 
-        .terminal-title {
-            color: #bc9ad9;
-            font-size: 0.85rem;
-            letter-spacing: 0.5px;
-            background: #180f22;
-            padding: 0.2rem 1rem;
-            border-radius: 30px;
-            font-weight: 500;
-            border: 1px solid #4a2a6a;
-            box-shadow: inset 0 0 3px #2f1a42;
+        .stalker-card {
+            max-width: 920px;
+            width: 100%;
+            background: #0f0717;
+            background: linear-gradient(145deg, #1c1029 0%, #090311 100%);
+            border: 1px solid #593d6e;
+            border-top: 1px solid #7a57a3;
+            border-left: 1px solid #684b8a;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.8), inset 0 1px 0 rgba(170, 120, 220, 0.2);
+            padding: 1.6rem 2rem 2rem 2rem;
+            position: relative;
+            transition: all 0.2s;
         }
 
-        .terminal-title i {
-            font-style: normal;
-            color: #e6ccff;
+        .stalker-card::before {
+            content: "";
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            width: 45px;
+            height: 45px;
+            border-top: 2px solid #8a5fa3;
+            border-left: 2px solid #8a5fa3;
+            opacity: 0.75;
+            pointer-events: none;
         }
 
-        /* Основное тело */
-        .terminal-body {
-            padding: 2rem 1.8rem;
+        .stalker-card::after {
+            content: "";
+            position: absolute;
+            bottom: 12px;
+            right: 12px;
+            width: 45px;
+            height: 45px;
+            border-bottom: 2px solid #8a5fa3;
+            border-right: 2px solid #8a5fa3;
+            opacity: 0.75;
+            pointer-events: none;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            flex-wrap: wrap;
+            margin-bottom: 1rem;
+            border-bottom: 2px dashed #7a57a3;
+            padding-bottom: 0.75rem;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            letter-spacing: 4px;
+            font-weight: 800;
+            color: #e1b3ff;
+            text-shadow: 0 0 5px #7e46b3, 2px 2px 0 #2d164a;
+            font-family: 'Courier New', monospace;
+            text-transform: uppercase;
+        }
+
+        .sub-tag {
+            font-size: 0.7rem;
+            background: #261b36;
+            padding: 0.2rem 0.6rem;
+            border-radius: 2px;
+            color: #cdb3e8;
+            letter-spacing: 1px;
+            border: 0.5px solid #8a5fa3;
+            font-weight: bold;
+        }
+
+        .status-grid {
             display: flex;
             flex-wrap: wrap;
-            gap: 2rem;
             justify-content: space-between;
-        }
-
-        /* Левая колонка — тёмно-фиолетовый фон */
-        .ascii-scp {
-            flex: 1.2;
-            min-width: 280px;
-            background: #0e0817;
-            border-radius: 12px;
-            padding: 1rem 0.8rem 1.2rem 0.8rem;
-            border: 1px solid #4a2a6a;
-            box-shadow: inset 0 0 18px rgba(80, 20, 120, 0.5), 0 4px 12px black;
-            transition: all 0.2s;
-            display: flex;
-            flex-direction: column;
             align-items: center;
-            justify-content: flex-start;
-            text-align: center;
+            gap: 1.5rem;
+            background: #150b1f70;
+            background: linear-gradient(95deg, #180f24, #0f0717);
+            padding: 1rem 1.2rem;
+            margin: 1.2rem 0 1rem 0;
+            border-left: 4px solid #9466c4;
+            border-radius: 0px 8px 8px 0px;
         }
 
-        .ascii-scp:hover {
-            border-color: #aa77dd;
-            box-shadow: 0 0 18px rgba(160, 80, 255, 0.3);
+        .image-block {
+            flex-shrink: 0;
         }
 
-        /* Стилизованный логотип SCP (фиолетовые оттенки) */
-        .scp-logo {
+        .anomaly-image {
+            width: 160px;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 12px;
+            border: 3px solid #a06fd1;
+            box-shadow: 0 0 15px rgba(138, 95, 163, 0.8);
+            background-color: #2a1a3a;
+            transition: transform 0.2s ease;
+            display: block;
+        }
+
+        .anomaly-image:hover {
+            transform: scale(1.02);
+            box-shadow: 0 0 20px #bc8ce6;
+        }
+
+        .name-block {
+            flex: 1;
+            min-width: 180px;
+            text-align: right;
+        }
+
+        .happy-name {
             font-family: 'Courier New', monospace;
-            font-weight: bold;
-            color: #c49aff;
-            text-shadow: 0 0 8px #8a4aff, 0 0 2px #cf9eff;
-            margin-bottom: 1rem;
-        }
-
-        .scp-letters {
-            font-size: 3.2rem;
-            letter-spacing: 12px;
-            line-height: 1.2;
+            font-size: 2.2rem;
+            font-weight: 800;
+            color: #ffdb9e;
+            text-shadow: 0 0 8px #ac6ed6, 2px 2px 0 #3b2352;
+            letter-spacing: 2px;
+            background: #2a1a3e80;
+            backdrop-filter: blur(2px);
+            padding: 0.4rem 1rem;
+            border-radius: 16px;
+            border: 1px solid #b27ad9;
+            display: inline-block;
+            word-break: keep-all;
             white-space: nowrap;
         }
-        @media (max-width: 540px) {
-            .scp-letters {
-                font-size: 2.2rem;
-                letter-spacing: 6px;
+
+        @media (max-width: 700px) {
+            .status-grid {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+            .name-block {
+                text-align: left;
+                width: 100%;
+            }
+            .happy-name {
+                font-size: 1.6rem;
+                white-space: normal;
+                word-break: keep-all;
+                display: inline-block;
+            }
+            .anomaly-image {
+                width: 120px;
+                height: 120px;
+            }
+            .back-button {
+                top: 12px;
+                left: 12px;
+                padding: 0.3rem 0.9rem;
+                font-size: 0.85rem;
             }
         }
 
-        .scp-dots {
-            font-size: 2rem;
-            letter-spacing: 12px;
-            color: #b07fdf;
-            margin-top: -0.3rem;
+        @media (max-width: 480px) {
+            .anomaly-image {
+                width: 100px;
+                height: 100px;
+            }
+            .happy-name {
+                font-size: 1.3rem;
+            }
         }
 
-        .scp-motto {
-            margin-top: 0.5rem;
-            font-size: 0.85rem;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #9f7abf;
-            border-top: 1px dashed #6a3a8a;
-            padding-top: 1rem;
-            display: inline-block;
-            width: 100%;
+        hr {
+            border: none;
+            height: 1px;
+            background: linear-gradient(90deg, #684b8a, #cba3f0, #684b8a);
+            margin: 1.2rem 0 1.4rem 0;
         }
 
-        .scp-motto span {
-            display: block;
-            font-weight: bold;
-            color: #e6ccff;
-            font-size: 1rem;
-            margin-bottom: 0.4rem;
-        }
-
-        /* Общий стиль для кнопок-ссылок */
-        .action-link {
-            background: #170f20;
-            border: 1px solid #6a3a8a;
-            color: #d4b3ff;
-            font-family: 'Courier New', monospace;
-            font-size: 0.9rem;
-            font-weight: bold;
-            padding: 0.5rem 1rem;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            box-shadow: 0 0 5px rgba(128, 0, 255, 0.4);
-            backdrop-filter: blur(2px);
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
-        }
-
-        .action-link:hover {
-            background: #2a1a3a;
-            border-color: #9a5acf;
-            color: #f0e0ff;
-            box-shadow: 0 0 12px #9a4aff;
-            transform: scale(1.02);
-        }
-
-        .action-link:active {
-            transform: scale(0.98);
-        }
-
-        .personal-file-link {
-            margin-top: 1.5rem;
-        }
-
-        .scp-link {
-            margin-top: 0.8rem;
-        }
-
-        /* Правая колонка */
-        .info-stalker {
-            flex: 1;
-            min-width: 320px;
-            background: rgba(18, 10, 26, 0.85);
-            border-radius: 14px;
-            padding: 1.4rem 1.8rem;
-            border-left: 2px solid #6a3a8a;
-            backdrop-filter: blur(2px);
-        }
-
-        .stalker-title {
-            font-size: 3.2rem;
-            font-weight: 800;
-            letter-spacing: 6px;
-            text-transform: uppercase;
-            background: linear-gradient(135deg, #e6ccff, #c49aff, #8a4aff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            text-shadow: 0 0 12px #7a3aff;
-            margin-bottom: 0.5rem;
-            border-bottom: 2px solid #9a6acf;
-            display: inline-block;
-            padding-right: 1rem;
-        }
-
-        .stalker-sub {
-            color: #b592e0;
-            font-size: 0.75rem;
-            margin-bottom: 1.8rem;
-            letter-spacing: 1px;
+        .details-grid {
             display: flex;
-            gap: 12px;
-            align-items: baseline;
+            flex-direction: column;
+            gap: 1.1rem;
         }
 
-        .neofetch-block {
-            margin-top: 1rem;
-        }
-
-        .neofetch-line {
+        .detail-item {
             display: flex;
             flex-wrap: wrap;
             align-items: baseline;
-            margin: 0.4rem 0;
-            font-size: 0.9rem;
-            border-bottom: 1px dotted #5a3a7a;
-            padding: 0.2rem 0;
+            border-bottom: 1px dotted #805fb0;
+            padding-bottom: 0.5rem;
         }
 
-        .neofetch-line.multiline {
-            flex-direction: column;
-            align-items: flex-start;
-            gap: 0.2rem;
-        }
-
-        .neofetch-key {
-            font-weight: bold;
-            color: #d4b3ff;
-            min-width: 110px;
-            letter-spacing: 0.4px;
+        .detail-label {
+            width: 170px;
+            font-weight: 700;
+            color: #cfb3f0;
             text-transform: uppercase;
+            letter-spacing: 1px;
             font-size: 0.8rem;
+            text-shadow: 0 0 1px #9b74c2;
         }
 
-        .neofetch-value {
-            color: #f0e0ff;
-            font-weight: 500;
+        .detail-value {
+            flex: 1;
+            font-weight: 600;
+            color: #f2e4ff;
+            font-size: 1.05rem;
+            letter-spacing: 0.3px;
             word-break: break-word;
+            font-family: 'Courier New', monospace;
         }
 
-        /* Пустые строки */
-        .empty-line {
-            margin: 0.4rem 0;
-            padding: 0.2rem 0;
-            visibility: hidden;
-            height: 1.5rem;
-        }
-
-        .user-host {
-            font-size: 1.2rem;
-            margin: 0.7rem 0 0.2rem;
-            color: #e6ccff;
-            background: #140c1f;
-            display: inline-block;
-            padding: 0.2rem 0.8rem;
+        .access-level .detail-value {
+            background: #2a1a3e;
+            padding: 0.15rem 0.8rem;
             border-radius: 30px;
-            border: 1px solid #6a3a8a;
-        }
-
-        .separator {
-            color: #9a6acf;
-            margin: 0.6rem 0;
+            display: inline-block;
+            width: auto;
+            font-weight: 800;
+            font-size: 1.4rem;
+            color: #f0c0ff;
+            text-shadow: 0 0 3px #aa73db;
+            border: 1px solid #b27ad9;
             letter-spacing: 2px;
         }
 
-        .cursor-blink {
+        .group-badge {
+            background: #352555;
             display: inline-block;
-            width: 12px;
-            height: 18px;
-            background-color: #b77eff;
-            vertical-align: middle;
-            margin-left: 8px;
-            box-shadow: 0 0 6px #bf7eff;
-            animation: blink 1s step-end infinite;
+            padding: 0.15rem 0.9rem;
+            border-radius: 3px;
+            font-size: 0.9rem;
+            border-left: 3px solid #c18df0;
         }
 
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
+        .bio-section {
+            margin-top: 1.8rem;
+            margin-bottom: 1rem;
+            background: #1f102e80;
+            background: linear-gradient(135deg, #201534, #110b1c);
+            border-left: 3px solid #b37de0;
+            padding: 1rem 1.3rem;
+            border-radius: 8px;
+            box-shadow: inset 0 0 0 1px rgba(170, 120, 220, 0.2), 0 2px 6px rgba(0,0,0,0.3);
         }
 
-        @media (max-width: 860px) {
-            .terminal-body {
-                flex-direction: column;
-                padding: 1.5rem;
-            }
-            .stalker-title {
-                font-size: 2.5rem;
-            }
-            .neofetch-key {
-                min-width: 95px;
-            }
-            .scp-letters {
-                font-size: 2.8rem;
-            }
+        .bio-header {
+            font-size: 1.3rem;
+            font-weight: bold;
+            color: #f2d6ff;
+            letter-spacing: 2px;
+            text-shadow: 0 0 4px #a067cf;
+            border-bottom: 1px dashed #b27ad9;
+            display: inline-block;
+            margin-bottom: 0.8rem;
+            font-family: 'Courier New', monospace;
         }
 
-        @media (max-width: 540px) {
-            .terminal-body {
-                padding: 1rem;
-            }
-            .stalker-title {
-                font-size: 2rem;
-                letter-spacing: 3px;
-            }
-            .neofetch-line {
-                flex-direction: column;
-                gap: 0.2rem;
-            }
-            .neofetch-line.multiline {
-                flex-direction: column;
-            }
+        .bio-text {
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            line-height: 1.45;
+            color: #f1e6fc;
+            text-align: justify;
+            letter-spacing: 0.2px;
+        }
+
+        .bio-text p {
+            margin-bottom: 0.5rem;
+        }
+
+        .mission-list {
+            margin-top: 0.5rem;
+            padding-left: 1.5rem;
+            list-style-type: none;
+        }
+
+        .mission-list li {
+            margin-bottom: 0.25rem;
+            position: relative;
+        }
+
+        .mission-list li::before {
+            content: "•";
+            color: #dbb3ff;
+            font-weight: bold;
+            position: absolute;
+            left: -1rem;
+        }
+
+        .warning-footer {
+            margin-top: 2rem;
+            padding-top: 0.8rem;
+            text-align: center;
+            font-size: 0.7rem;
+            color: #cdb0eb;
+            border-top: 1px dashed #b27ad9;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .stamp {
+            font-family: monospace;
+            background: #211538;
+            padding: 0.2rem 0.8rem;
+            font-size: 0.65rem;
+            color: #e6ceff;
+            letter-spacing: 1px;
+            border-radius: 2px;
+        }
+
+        .stalker-card {
+            animation: flickerPurple 0.12s infinite alternate;
+        }
+
+        @keyframes flickerPurple {
+            0% { opacity: 0.98; text-shadow: 0 0 1px #9f72cb; }
+            100% { opacity: 1; text-shadow: 0 0 2px #cc9eff; }
         }
     </style>
 </head>
 <body>
-<div class="terminal">
-    <div class="terminal-header">
-        <a href="index.html" class="back-button">[НАЗАД]</a>
-        <div class="terminal-title">
-            <i>stalker@scp-found:~</i> — ZONE TERMINAL v.ANOM
+
+    <a href="Сталкер.html" class="back-button">[НАЗАД]</a>
+
+    <div class="stalker-card">
+        <div class="header">
+            <h1>СТАЛКЕР</h1>
+            <div class="sub-tag">anomaly‑ready v.2.4</div>
+        </div>
+
+        <div class="status-grid">
+            <div class="image-block">
+                <img class="anomaly-image" 
+                     src="https://i.pinimg.com/736x/a9/b9/2e/a9b92e2f356af41cb557de233e019a2e.jpg" 
+                     alt="zone anomaly"
+                     onerror="this.onerror=null; this.src='data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20160%20160%22%3E%3Crect%20width%3D%22160%22%20height%3D%22160%22%20fill%3D%22%232a1a3e%22%2F%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2250%25%22%20text-anchor%3D%22middle%22%20dy%3D%22.3em%22%20fill%3D%22%23cdb3e8%22%20font-size%3D%2224%22%3E!%3C%2Ftext%3E%3C%2Fsvg%3E';">
+            </div>
+            <div class="name-block">
+                <div class="happy-name">Happy Facen</div>
+            </div>
+        </div>
+
+        <hr>
+
+        <div class="details-grid">
+            <div class="detail-item">
+                <div class="detail-label">МЕСТО РАБОТЫ:</div>
+                <div class="detail-value">Зона-53.</div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">ГРУППА:</div>
+                <div class="detail-value"><span class="group-badge">М.О.Г. Альфа-9</span></div>
+            </div>
+            <div class="detail-item">
+                <div class="detail-label">ДОЛЖНОСТЬ:</div>
+                <div class="detail-value">Лейтенант &nbsp; <span style="font-size:0.8rem; color:#dcb3ff;">(оперативный сектор)</span></div>
+            </div>
+            <div class="detail-item access-level">
+                <div class="detail-label">УРОВЕНЬ ДОСТУПА:</div>
+                <div class="detail-value">5</div>
+            </div>
+        </div>
+
+        <!-- ДЕТСТВО -->
+        <div class="bio-section">
+            <div class="bio-header">[ДЕТСТВО]</div>
+            <div class="bio-text">
+                <p>Happy родился в обычной семье: его отец был инженером, а мать — учительницей. С раннего детства Happy проявлял любознательность и страсть к фантастике и самообороне. Он часто собирал модели невозможных сооружений из разных произведений и делал макеты оружия на даче, используя подручные материалы. Эта страсть к фантастике и самообороне в сочетании с природной смекалкой дала ему преимущество среди сверстников.</p>
+                <p>Также Happy проявлял интерес к живым существам в фантастике. Они не казались ему отвратительными или страшными, скорее интересными и аналогичными земным. Он старался выявить их природу и способы взаимодействия с ними.</p>
+            </div>
+        </div>
+
+        <!-- СТУДЕНЧЕСКИЕ ГОДЫ -->
+        <div class="bio-section">
+            <div class="bio-header">[СТУДЕНЧЕСКИЕ ГОДЫ]</div>
+            <div class="bio-text">
+                <p>Успешно окончил школу с уклоном на предметы, связанные с естественными науками и математикой. На накопленные деньги Happy решил поступить в академию Сухопутных войск В.С. США в Вест-Пойнт Штат Нью-йорк. В связи с проблемами в рекрутировании новых бойцов он поступил без конкуренции.</p>
+                <p>Обучение шло 4 года и в течении этого времени Happy проявлял себя как вполне дисциплинированный боец что строго действует по уставу, редко от него отклоняясь.</p>
+                <p>По завершении Академии Happy был распределен в мотострелковую дивизию которая попала под размещение в Афганистан.</p>
+            </div>
+        </div>
+
+        <!-- ВОЕННАЯ КАРЬЕРА -->
+        <div class="bio-section">
+            <div class="bio-header">[ВОЕННАЯ КАРЬЕРА]</div>
+            <div class="bio-text">
+                <p>Служба в Афганистане: Happy участвовал в нескольких операциях против организации "Аль-Каида". Во время них проявлял себя как стрессоустойчивый и обученный боец.</p>
+                <p>Во время данных операций получил звание сержанта за проявленный героизм и отвагу. В дальнейшем через 3 года был ротирован из афганистана. После разорвал контракт с М.О. США в пользу более выгодного контракта как сотрудника безопасности с ранее неизвестной ему организацией.</p>
+            </div>
+        </div>
+
+        <!-- ФОНД S.C.P. -->
+        <div class="bio-section">
+            <div class="bio-header">[ФОНД S.C.P.]</div>
+            <div class="bio-text">
+                <p>Во время его службы в Афганистане разведданные фонда засекли высокую квалификацию Happy. После его увольнения они предложили ему контракт на службу внутри Фонда как сотрудника группы быстрого реагирования. В это время Happy не переставал проявлять себя как дисциплинированный боец постоянно перечитывая кодекс С.В.Т. и устав Службы Безопасности.</p>
+                <p>В дальнейшем Happy запатентовал себя как квалифицированный сотрудник Мобильно Оперативной Группы. Во время своей службы в зоне 17 произошел инцидент включающий в себя налёт со стороны Повстанцев хаоса и открытия камер содержания интересующих их объектов. Среди них был SCP-811. Happy был выслан на удержание прорыва внутри Административной зоны. Во время продвижения на позиции его отрядом был встречен объект 811. Большинство сотрудников постаралось содержать объект используя имеющееся при себе снаряжение, но Happy остановил их предложив альтернативу. Зная что объект уже был сыт, учитывая отсутствие агрессии в сторону Г.Б.Р. он постарался наладить контакт с объектом, объяснив ему что: "Некая злая организация, что планирует её взять для ужасных опытов проникла внутрь учреждения".</p>
+                <p>SCP-811 поверила данному убеждению под влиянием сытости и пассивности со стороны Happy, поэтому, сотрудники ГБР вполне смогли обратить Объект 811 против своего противника. Во время рассмотрения инцидента, сотрудники ОВБ перенаправили документацию случая к вышестоящим органам. Таким образом, руки Happy попало приглашение о прохождении вступительных экзаменов в Альфа-9.</p>
+            </div>
+        </div>
+
+        <!-- М.О.Г. -->
+        <div class="bio-section">
+            <div class="bio-header">[М.О.Г.]</div>
+            <div class="bio-text">
+                <p>Тренировка в Мог: Он прошел специализированную подготовку, направленную на работу с аномальными объектами, включая изучение методов быстро реагирования на экстренные ситуации и применение нестандартных тактических приемов. Это поддерживалось как физической, так и психологической подготовкой. Также в руки к Happy попали документы о реакции определенных объектов на раздражители что сделало обращение с ними более эффективными.</p>
+            </div>
+        </div>
+
+        <!-- РАСПРЕДЕЛЕНИЕ В ЗОНУ 34 -->
+        <div class="bio-section">
+            <div class="bio-header">[РАСПРЕДЕЛЕНИЕ В ЗОНУ 34]</div>
+            <div class="bio-text">
+                <p>Приказ о переводе: После завершения подготовки и выбора позывным бойца, сотрудник Альфа-9 “Сталкер” был распределен в зону 34 для службы и контроля Действий М.О.Г. над аномальными сущностями. Распределение было выполнено в связи с отсутствием компетенции М.О.Г. внутри данной зоны.</p>
+            </div>
+        </div>
+
+        <!-- ЗОНА 34 -->
+        <div class="bio-section">
+            <div class="bio-header">[ЗОНА 34]</div>
+            <div class="bio-text">
+                <p>Выполнял задачи обычного М.О.Г. попутно выслеживая некомпетентных сотрудников и проводил разбирательства в присутствии лиц администрации комплекса и выше.</p>
+                <p>Спустя какое-то время на зону перевели О.В.Б. и после некоторого времени сотрудник подписал с ними выгодный контракт впоследствии повесившись на максимальную должность контрактника.</p>
+                <p>Сталкер участвовал в данных миссиях:</p>
+                <ul class="mission-list">
+                    <li>“Поимка сбежавшего SCP”</li>
+                    <li>“Ликвидация аномальной активности в лагере”</li>
+                    <li>“Замкнутый круг(1)”</li>
+                    <li>“Замкнутый круг(2)”</li>
+                    <li>“Разрушение метеоритов”</li>
+                    <li>“Проверка аномальной активности в шахте”</li>
+                    <li>“Город грехов”</li>
+                    <li>“Удаление”</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- ЗОНА 53 -->
+        <div class="bio-section">
+            <div class="bio-header">[ЗОНА 53]</div>
+            <div class="bio-text">
+                <p>После уничтожения зоны 34 Агент М.О.Г. “Сталкер” был переведён на зону 53 где подписал контракт с Г.О.К. и продолжил свою работу.</p>
+            </div>
+        </div>
+
+        <div class="warning-footer">
+            <div class="stamp">
+                ☢  ПД-КОНТРОЛЬ  ☢
+            </div>
+            <div style="display: flex; gap: 6px; align-items: center;">
+                <span>⚠️</span>
+                <span>ЗОНА-53 • допуск подтвержден</span>
+                <span style="font-size: 1.1rem;">⚙️</span>
+            </div>
+            <div class="stamp">
+                ALFA-9 | M.O.G.
+            </div>
         </div>
     </div>
-    <div class="terminal-body">
-        <div class="ascii-scp">
-            <div class="scp-logo">
-                <div class="scp-letters">S.C.P.</div>
-                <div class="scp-dots">•••</div>
-            </div>
-            <div class="scp-motto">
-                <span>SECURE, CONTAIN, PROTECT</span>
-                ────◆────
-            </div>
-            <a href="Личное дело.html" class="action-link personal-file-link">[ЛИЧНОЕ ДЕЛО]</a>
-            <a href="SCP-1921.html" class="action-link scp-link">[SCP-1921]</a>
-        </div>
-
-        <div class="info-stalker">
-            <div class="stalker-title">СТАЛКЕР</div>
-            <div class="stalker-sub">
-                <span>⚡ anomaly‑ready</span>
-                <span>|</span>
-                <span>⚠️целостность файлов: ▰▰▰▰▰▰▰▰▰▰ 94%</span>
-            </div>
-
-            <div class="user-host">
-                stalker@the-zone
-            </div>
-            <div class="separator">━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━</div>
-
-            <div class="neofetch-block">
-                <div class="neofetch-line multiline">
-                    <span class="neofetch-key">И.Ф.:</span>
-                    <span class="neofetch-value">Happy Facen</span>
-                </div>
-                <div class="neofetch-line multiline">
-                    <span class="neofetch-key">МЕСТО РАБОТЫ:</span>
-                    <span class="neofetch-value">Зона-53.</span>
-                </div>
-                <div class="neofetch-line multiline">
-                    <span class="neofetch-key">Группа:</span>
-                    <span class="neofetch-value">М.О.Г. Альфа-9</span>
-                </div>
-                <div class="neofetch-line multiline">
-                    <span class="neofetch-key">Должность:</span>
-                    <span class="neofetch-value">Лейтенант</span>
-                </div>
-                <div class="neofetch-line multiline">
-                    <span class="neofetch-key">Уровень доступа:</span>
-                    <span class="neofetch-value">5</span>
-                </div>
-
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-                <div class="empty-line"></div>
-            </div>
-
-            <div style="margin-top: 1.5rem; font-size: 0.75rem; border-top: 1px solid #4a2a6a; padding-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap;">
-                <span>🔻 SCP FOUNDATION | ЗОНА ОТЧУЖДЕНИЯ</span>
-                <span>⚠️ stalker@scp: ~ $ <span class="cursor-blink"></span></span>
-            </div>
-        </div>
-    </div>
-</div>
 </body>
 </html>
