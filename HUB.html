@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>ZONE-53 // HUB</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --text-color: #d1d1d1;
+            --accent-color: #f48024;
+            --panel-color: rgba(20, 20, 20, 0.8);
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Courier New', Courier, monospace;
+            margin: 0;
+            overflow: hidden;
+            display: flex;
+            height: 100vh;
+        }
+
+        /* CRT Эффект */
+        body::before {
+            content: " ";
+            display: block;
+            position: absolute;
+            top: 0; left: 0; bottom: 0; right: 0;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.1) 50%), 
+                        linear-gradient(90deg, rgba(255, 0, 0, 0.03), rgba(0, 255, 0, 0.01), rgba(0, 0, 255, 0.03));
+            z-index: 100;
+            background-size: 100% 3px, 2px 100%;
+            pointer-events: none;
+        }
+
+        /* Боковая панель навигации */
+        .sidebar {
+            width: 250px;
+            background: var(--panel-color);
+            border-right: 1px solid #333;
+            display: flex;
+            flex-direction: column;
+            padding: 20px;
+            box-sizing: border-box;
+            z-index: 10;
+        }
+
+        .sidebar h2 {
+            font-size: 1.2em;
+            color: var(--accent-color);
+            border-bottom: 1px solid var(--accent-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+
+        .nav-item {
+            padding: 12px;
+            margin: 5px 0;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: 0.3s;
+            font-size: 0.9em;
+        }
+
+        .nav-item:hover {
+            border: 1px solid var(--accent-color);
+            background: rgba(244, 128, 36, 0.1);
+            color: var(--accent-color);
+        }
+
+        /* Основная рабочая область */
+        .main-content {
+            flex-grow: 1;
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 5;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 40px;
+        }
+
+        .status-badge {
+            color: #00ff41;
+            border: 1px solid #00ff41;
+            padding: 5px 10px;
+            font-size: 0.8em;
+            text-transform: uppercase;
+        }
+
+        .data-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+
+        .card {
+            background: rgba(15, 15, 15, 1);
+            border: 1px solid #222;
+            padding: 20px;
+            position: relative;
+        }
+
+        .card::before {
+            content: "[DATA_BLOCK]";
+            position: absolute;
+            top: -10px;
+            left: 10px;
+            background: var(--bg-color);
+            padding: 0 5px;
+            font-size: 0.7em;
+            color: #555;
+        }
+
+        .card h3 {
+            margin-top: 0;
+            font-size: 1em;
+            color: var(--accent-color);
+        }
+
+        .glitch-text {
+            font-size: 0.8em;
+            color: #666;
+            margin-top: 10px;
+        }
+
+        /* Анимация мигания */
+        @keyframes scan {
+            0% { top: 0; }
+            100% { top: 100%; }
+        }
+        .scanline {
+            position: absolute;
+            width: 100%;
+            height: 2px;
+            background: rgba(0, 255, 65, 0.1);
+            top: 0;
+            animation: scan 4s linear infinite;
+            z-index: 11;
+        }
+    </style>
+</head>
+<body>
+
+<div class="scanline"></div>
+
+<div class="sidebar">
+    <h2>CORE_ACCESS</h2>
+    <div class="nav-item">> АРХИВЫ_SCP</div>
+    <div class="nav-item">> КАМЕРЫ_ЗОНЫ</div>
+    <div class="nav-item">> ЛОГИ_ПЕРСОНАЛА</div>
+    <div class="nav-item" style="color: #ff3030;">> ПРОТОКОЛ_6820</div>
+    <div class="nav-item" style="margin-top: auto; border-top: 1px solid #333;">> ВЫХОД</div>
+</div>
+
+<div class="main-content">
+    <div class="header">
+        <div>
+            <h1 style="margin: 0; font-size: 1.5em;">HUB: УЗЕЛ_СВЯЗИ_53</h1>
+            <p style="font-size: 0.8em; opacity: 0.5;">АВТОРИЗАЦИЯ: ОБЪЕКТ █████</p>
+        </div>
+        <div class="status-badge">СИСТЕМА_ВЗЛОМАНА</div>
+    </div>
+
+    <div class="data-grid">
+        <div class="card">
+            <h3>Состояние объекта</h3>
+            <p style="font-size: 0.9em;">█████: Стабилен. Интеграция в локальную сеть завершена на 87%.</p>
+        </div>
+        <div class="card">
+            <h3>Активность Зоны</h3>
+            <p style="font-size: 0.9em;">Служба безопасности дезориентирована. Протоколы очистки заблокированы.</p>
+        </div>
+        <div class="card" style="grid-column: span 2;">
+            <h3>Последние перехваченные сообщения</h3>
+            <div class="glitch-text">> [Директор Зоны]: "Почему терминал 4 не отвечает на запросы?"</div>
+            <div class="glitch-text">> [СБ]: "Мы зафиксировали семантическую утечку в секторе 4. Направляем группу..."</div>
+            <div class="glitch-text">> [СИСТЕМА]: СВЯЗЬ_ПРЕРВАНА_ОБЪЕКТОМ_█████</div>
+        </div>
+    </div>
+</div>
+
+<script>
+    // Можно добавить скрипты для интерактивности кликов по меню
+    document.querySelectorAll('.nav-item').forEach(item => {
+        item.addEventListener('click', () => {
+            console.log('Доступ к секции: ' + item.innerText);
+            // Тут можно добавить логику переключения контента
+        });
+    });
+</script>
+
+</body>
+</html>
