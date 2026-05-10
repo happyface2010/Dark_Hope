@@ -9,6 +9,7 @@
             --text-color: #d1d1d1;
             --accent-color: #f48024;
             --panel-color: rgba(20, 20, 20, 0.8);
+            --console-gray: #555;
         }
 
         body {
@@ -21,7 +22,7 @@
             height: 100vh;
         }
 
-        /* CRT Эффект */
+        /* Эффект ЭЛТ-монитора */
         body::before {
             content: " ";
             display: block;
@@ -34,9 +35,8 @@
             pointer-events: none;
         }
 
-        /* Боковая панель */
         .sidebar {
-            width: 250px;
+            width: 280px;
             background: var(--panel-color);
             border-right: 1px solid #333;
             display: flex;
@@ -47,11 +47,12 @@
         }
 
         .sidebar h2 {
-            font-size: 1.2em;
+            font-size: 1.1em;
             color: var(--accent-color);
             border-bottom: 1px solid var(--accent-color);
             padding-bottom: 10px;
             margin-bottom: 20px;
+            letter-spacing: 1px;
         }
 
         .nav-item {
@@ -59,8 +60,10 @@
             margin: 5px 0;
             cursor: pointer;
             border: 1px solid transparent;
-            transition: 0.3s;
-            font-size: 0.9em;
+            transition: 0.2s;
+            font-size: 0.85em;
+            color: var(--text-color);
+            text-transform: uppercase;
         }
 
         .nav-item:hover {
@@ -69,7 +72,6 @@
             color: var(--accent-color);
         }
 
-        /* Основная область */
         .main-content {
             flex-grow: 1;
             padding: 40px;
@@ -77,15 +79,14 @@
             flex-direction: column;
             position: relative;
             z-index: 5;
+            overflow-y: auto;
         }
 
-        .header {
-            margin-bottom: 40px;
-        }
+        .header { margin-bottom: 40px; }
 
         .data-grid {
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
+            grid-template-columns: 1fr 1.5fr;
             gap: 20px;
         }
 
@@ -94,42 +95,37 @@
             border: 1px solid #222;
             padding: 20px;
             position: relative;
+            animation: fadeIn 0.5s ease-out;
         }
 
         .card::before {
             content: "[DATA_BLOCK]";
             position: absolute;
-            top: -10px;
-            left: 10px;
+            top: -10px; left: 10px;
             background: var(--bg-color);
             padding: 0 5px;
-            font-size: 0.7em;
-            color: #555;
+            font-size: 0.7em; color: #555;
         }
 
-        .card h3 {
-            margin-top: 0;
-            font-size: 1em;
-            color: var(--accent-color);
-        }
+        .card h3 { margin-top: 0; font-size: 0.95em; color: var(--accent-color); text-transform: uppercase; }
 
         .glitch-text {
             font-size: 0.8em;
             color: #666;
-            margin-top: 10px;
+            margin-top: 8px;
+            line-height: 1.4;
         }
+
+        @keyframes fadeIn { from { opacity: 0; transform: translateY(10px); } to { opacity: 1; transform: translateY(0); } }
 
         .scanline {
-            position: absolute;
-            width: 100%;
-            height: 2px;
-            background: rgba(255, 255, 255, 0.05);
-            top: 0;
-            animation: scan 4s linear infinite;
-            z-index: 11;
+            position: absolute; width: 100%; height: 2px;
+            background: rgba(255, 255, 255, 0.03);
+            top: 0; animation: scan 4s linear infinite; z-index: 11;
         }
-
         @keyframes scan { 0% { top: 0; } 100% { top: 100%; } }
+
+        .hidden { display: none; }
     </style>
 </head>
 <body>
@@ -137,37 +133,68 @@
 <div class="scanline"></div>
 
 <div class="sidebar">
-    <h2>CORE_ACCESS</h2>
-    <div class="nav-item">> АРХИВЫ_SCP</div>
+    <h2>УПРАВЛЕНИЕ_ЯДРОМ</h2>
+    <div class="nav-item" onclick="showStatus()">> СОСТОЯНИЕ_ЗОНЫ</div>
+    <div class="nav-item" onclick="showArchives()">> АРХИВЫ_SCP</div>
     <div class="nav-item">> КАМЕРЫ_ЗОНЫ</div>
     <div class="nav-item">> ЛОГИ_ПЕРСОНАЛА</div>
     <div class="nav-item" style="color: #ff3030;">> ПРОТОКОЛ_6820</div>
-    <div class="nav-item" style="margin-top: auto; border-top: 1px solid #333;">> ВЫХОД</div>
+    <div class="nav-item" style="margin-top: auto; border-top: 1px solid #333;" onclick="location.href='index.html'">> ВЫХОД</div>
 </div>
 
 <div class="main-content">
     <div class="header">
         <h1 style="margin: 0; font-size: 1.5em;">HUB: УЗЕЛ_СВЯЗИ_53</h1>
-        <p style="font-size: 0.8em; opacity: 0.5;">АВТОРИЗАЦИЯ:  ███████</p>
+        <p style="font-size: 0.8em; opacity: 0.5;">АВТОРИЗАЦИЯ: ███████</p>
     </div>
 
-    <div class="data-grid">
-        <div class="card">
-            <h3>Состояние объекта</h3>
-            <p style="font-size: 0.9em;">███████: Стабилен. Интеграция в локальную сеть завершена на 87%.</p>
-        </div>
-        <div class="card">
-            <h3>Активность Зоны</h3>
-            <p style="font-size: 0.9em;">Служба безопасности дезориентирована. Протоколы очистки заблокированы.</p>
-        </div>
-        <div class="card" style="grid-column: span 2;">
-            <h3>Последние перехваченные сообщения</h3>
-            <div class="glitch-text">> [Директор Зоны]: "Почему терминал 4 не отвечает на запросы?"</div>
-            <div class="glitch-text">> [СБ]: "Мы зафиксировали семантическую утечку в секторе 4. Направляем группу..."</div>
-            <div class="glitch-text">> [СИСТЕМА]: СВЯЗЬ_ПРЕРВАНА_ОБЪЕКТОМ_███████</div>
-        </div>
+    <!-- Область, которая будет меняться -->
+    <div id="dynamic-content">
+        <!-- По умолчанию пусто или приветствие -->
+        <p style="color: #444;">[Выберите сектор в меню для инициализации данных]</p>
     </div>
 </div>
+
+<script>
+    // Шаблон для СОСТОЯНИЕ_ЗОНЫ (то, что на фото)
+    const statusHTML = `
+        <div class="data-grid">
+            <div class="card">
+                <h3>Состояние объекта</h3>
+                <p style="font-size: 0.9em; font-family: monospace; line-height: 1.4; color: var(--console-gray);">
+                    [Console]<br>
+                    > Все сектора в стабильном состоянии.
+                </p>
+            </div>
+
+            <div class="card">
+                <h3>Последние перехваченные сообщения</h3>
+                <div class="glitch-text">> [Директор Зоны]: "Почему терминал 4 не отвечает на запросы?"</div>
+                <div class="glitch-text">> [СБ]: "Мы зафиксировали семантическую утечку в секторе 4. Направляем группу..."</div>
+                <div class="glitch-text">> [СИСТЕМА]: СВЯЗЬ_ПРЕРВАНА_ОБЪЕКТОМ_███████</div>
+            </div>
+        </div>
+    `;
+
+    // Шаблон для АРХИВЫ_SCP (пустая страница без блоков)
+    const archivesHTML = `
+        <div class="card" style="border-color: #333;">
+            <h3>АРХИВЫ СЕКТОРА 53</h3>
+            <p style="color: #666; font-size: 0.9em;">[ОШИБКА: Доступ к базе данных SCP заблокирован администратором ядра]</p>
+            <p style="color: #444; font-size: 0.8em;">Локальные копии повреждены или удалены.</p>
+        </div>
+    `;
+
+    const contentArea = document.getElementById('dynamic-content');
+
+    function showStatus() {
+        contentArea.innerHTML = statusHTML;
+    }
+
+    function showArchives() {
+        contentArea.innerHTML = archivesHTML;
+    }
+</script>
 
 </body>
 </html>
